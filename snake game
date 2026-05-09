@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>星際貪食蛇</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #0f172a; /* Tailwind slate-900 */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            touch-action: none; /* Prevent pull-to-refresh on mobile */
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        #ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .panel {
+            pointer-events: auto;
+        }
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- UI Layer -->
+    <div id="ui-layer" class="flex flex-col justify-between p-4 text-white z-10">
+        <!-- HUD -->
+        <div id="hud" class="hidden flex justify-between items-start text-xl font-bold text-shadow">
+            <div>
+                <div class="text-pink-400 flex items-center gap-1 mb-1">
+                    生命: <span id="livesDisplay" class="flex gap-1 text-2xl drop-shadow-md"></span>
+                </div>
+                <div class="text-purple-400 flex items-center gap-1 mb-1">
+                    大絕招(按S): <span id="ultDisplay" class="flex gap-1 text-2xl drop-shadow-md"></span>
+                </div>
+                <div class="text-blue-400">關卡: <span id="levelDisplay">1</span></div>
+                <div class="text-green-400">時間: <span id="timeDisplay">03:00</span></div>
+                <div class="text-yellow-400">分數: <span id="scoreDisplay">0</span></div>
+            </div>
+            <div class="text-red-400 text-right">
+                蛇的長度: <span id="snakeLengthDisplay">0</span>
+            </div>
+        </div>
+
+        <!-- 倒數 15 秒大字提示 -->
+        <div id="urgentCountdown" class="hidden absolute top-10 right-10 text-7xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-red-400 to-red-600 animate-pulse drop-shadow-[0_0_15px_rgba(239,68,68,0.8)] z-20">
+            15
+        </div>
+
+        <!-- Start / Game Over Screen -->
+        <div id="menuPanel" class="panel absolute inset-0 flex flex-col items-center justify-center bg-slate-900/80 backdrop-blur-sm z-30">
+            <h1 id="menuTitle" class="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 mb-4 text-center">
+                星際貪食蛇
+            </h1>
+            <p id="menuSubtitle" class="text-lg md:text-xl text-slate-300 mb-8 max-w-md text-center px-4">
+                滑鼠/觸控移動戰機，自動射擊。<br>
+                <span class="text-purple-400 font-bold">遇到危險時可按 S 鍵施放長度減半大絕！</span><br>
+                <span class="text-pink-400 font-bold">打掉蛋糕阻止牠吃掉變長！</span><br>
+                將蛇消滅即可進入下一關。
+            </p>
+            <div id="finalScore" class="hidden text-2xl text-yellow-400 font-bold mb-6">最終分數: 0</div>
+            
+            <!-- Gemini AI Area -->
+            <div id="aiArea" class="flex flex-col items-center w-full max-w-lg mb-6">
+                <button id="aiBtn" class="px-6 py-2 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white font-bold rounded-full shadow-lg transform transition hover:scale-105 active:scale-95 text-lg mb-2">
+                    ✨ 聆聽蜜蜂女王的指引 ✨
+                </button>
+                <div id="aiText" class="text-md text-slate-200 text-left bg-slate-800/80 p-4 rounded-xl border border-purple-500/50 hidden w-full shadow-[0_0_15px_rgba(168,85,247,0.4)]"></div>
+            </div>
+
+            <button id="startBtn" class="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold rounded-full shadow-lg transform transition hover:scale-105 active:scale-95 text-xl">
+                開始遊戲
+            </button>
+        </div>
+    </div>
+
+<script>
+/**
+ * 遊戲主要邏輯
+ */
+
+// --- Gemini API Setup ---
+const apiKey = ""; // 執行環境會在 Runtime 自動提供，這裡留空即可
+
+async function fetchGeminiWithRetry(prompt, retries = 5) {
+    const delays = [1000, 2000, 4000, 8000, 16000];
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+    const payload = {
+        contents: [{ parts: [{ text: prompt }] }]
+    };
+
+    for (let i = 0; i < retries; i++) {
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const data = await response.json();
+            return data.candidates?.[0]?.content?.parts?.[0]?.text || "無法生成內容。";
+        } catch (error) {
+            if (i === retries - 1) return "通訊中斷，無法取得 AI 訊號。請稍後再試。";
+            await new Promise(resolve => setTimeout(resolve, delays[i]));
+        }
+    }
+}
+
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+
+// UI Elements
+const menuPanel = document.getElementById('menuPanel');
+const startBtn = document.getElementById('startBtn');
+const menuTitle = document.getElementById('menuTitle');
+const menuSubtitle = document.getElementById('menuSubtitle');
+const finalScoreEl = document.getElementById('finalScore');
+const hud = document.getElementById('hud');
+const levelDisplay = document.getElementById('levelDisplay');
+const timeDisplay = document.getElementById('timeDisplay');
+const scoreDisplay = document.getElementById('scoreDisplay');
+const snakeLengthDisplay = document.getElementById('snakeLengthDisplay');
+const livesDisplay = document.getElementById('livesDisplay');
+const ultDisplay = document.getElementById('ultDisplay');
+const urgentCountdown = document.getElementById('urgentCountdown');
+const aiBtn = document.getElementById('aiBtn');
+const aiText = document.getElementById('aiText');
+
+// Game State
+let GAME_STATE = 'MENU'; // MENU, PLAYING, TIME_UP_ANIM, GAMEOVER
+let animationId;
+let lastTime = 0;
+
+// Game Variables
+let level = 1;
+let score = 0;
+let lives = 5;
+let ultimates = 2; // 大絕招次數
+let baseSpeedMultiplier = 1;
+let levelTimeLeft = 180; // 3分鐘 = 180秒
+let nextHoneySpawnTime = 150; // 第一次蜂蜜在倒數至150秒(經過30秒)時掉落
+
+// Entities Arrays
+let bullets = [];
+let cakes = [];
+let honeyJars = [];
+let particles = [];
+let stars = [];
+
+// Screen handling
+let width, height;
+function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+    initStars();
+}
+window.addEventListener('resize', resize);
+
+// Input handling (Mouse & Touch)
+const input = { x: 0, y: 0, isDown: false };
+function updateInputPos(e) {
+    if (GAME_STATE !== 'PLAYING') return;
+    let clientX = e.clientX;
+    let clientY = e.clientY;
+    if (e.touches && e.touches.length > 0) {
+        clientX = e.touches[0].clientX;
+        clientY = e.touches[0].clientY;
+    }
+    input.x = clientX;
+    input.y = clientY;
+}
+window.addEventListener('mousemove', updateInputPos);
+window.addEventListener('touchmove', (e) => { updateInputPos(e); e.preventDefault(); }, {passive: false});
+window.addEventListener('mousedown', () => input.isDown = true);
+window.addEventListener('mouseup', () => input.isDown = false);
+window.addEventListener('touchstart', (e) => { input.isDown = true; updateInputPos(e); });
+window.addEventListener('touchend', () => input.isDown = false);
+
+// Keyboard handling (大絕招)
+window.addEventListener('keydown', (e) => {
+    if ((e.key === 's' || e.key === 'S') && GAME_STATE === 'PLAYING') {
+        useUltimate();
+    }
+});
+
+// --- Classes ---
+
+class Star {
+    constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speed = (Math.random() * 0.5 + 0.2);
+        this.color = `rgba(255, 255, 255, ${Math.random() * 0.5 + 0.3})`;
+    }
+    update(dt) {
+        this.y += this.speed * (dt / 16) * (1 + baseSpeedMultiplier * 0.5);
+        if (this.y > height) {
+            this.y = 0;
+            this.x = Math.random() * width;
+        }
+    }
+    draw(ctx) {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+class Player {
+    constructor() {
+        this.width = 40;
+        this.height = 40;
+        this.x = width / 2;
+        this.y = height - this.height - 20;
+        this.color = '#fde047'; // 黃色小蜜蜂身體
+        this.lastShot = 0;
+        this.fireRate = 150; // ms between shots
+        this.invulnerable = 0; // 無敵時間計時器 (ms)
+    }
+    update(dt, time) {
+        if (this.invulnerable > 0) {
+            this.invulnerable -= dt;
+        }
+
+        // 全方位平滑跟隨滑鼠/觸控點
+        const targetX = input.x || width / 2;
+        const targetY = input.y || height - this.height - 20;
+        
+        this.x += (targetX - this.x) * 0.2;
+        this.y += (targetY - this.y) * 0.2;
+
+        // 確保不會飛出畫面
+        if (this.x < this.width/2) this.x = this.width/2;
+        if (this.x > width - this.width/2) this.x = width - this.width/2;
+        if (this.y < this.height/2) this.y = this.height/2;
+        if (this.y > height - this.height/2) this.y = height - this.height/2;
+
+        // 自動射擊
+        if (time - this.lastShot > this.fireRate) {
+            this.shoot();
+            this.lastShot = time;
+        }
+    }
+    shoot() {
+        bullets.push(new Bullet(this.x, this.y - this.height/2));
+    }
+    draw(ctx) {
+        // 無敵時間內的閃爍效果
+        if (this.invulnerable > 0 && Math.floor(performance.now() / 100) % 2 === 0) {
+            return;
+        }
+
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        
+        // 蜜蜂翅膀 (左、右)
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.7)'; // 半透明白
+        ctx.beginPath();
+        ctx.ellipse(-15, -5, 12, 6, Math.PI / 4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(15, -5, 12, 6, -Math.PI / 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 蜜蜂毒刺 (尾部)
+        ctx.fillStyle = '#000000';
+        ctx.beginPath();
+        ctx.moveTo(-4, 15);
+        ctx.lineTo(4, 15);
+        ctx.lineTo(0, 25);
+        ctx.fill();
+
+        // 蜜蜂身體 (黃色橢圓)
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, 14, 20, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 黑條紋
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(-13, 0); ctx.lineTo(13, 0);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(-11, 8); ctx.lineTo(11, 8);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(-11, -8); ctx.lineTo(11, -8);
+        ctx.stroke();
+
+        // 觸角
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(-4, -18); ctx.lineTo(-8, -25);
+        ctx.moveTo(4, -18); ctx.lineTo(8, -25);
+        ctx.stroke();
+        ctx.fillStyle = '#000000';
+        ctx.beginPath();
+        ctx.arc(-8, -25, 2, 0, Math.PI * 2);
+        ctx.arc(8, -25, 2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 眼睛
+        ctx.beginPath();
+        ctx.arc(-5, -12, 2.5, 0, Math.PI * 2);
+        ctx.arc(5, -12, 2.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+    }
+}
+
+class Bullet {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.radius = 4;
+        this.speed = 12;
+        this.color = '#fef08a'; // yellow-200
+        this.markedForDeletion = false;
+    }
+    update(dt) {
+        this.y -= this.speed * (dt / 16);
+        if (this.y < -50) this.markedForDeletion = true;
+    }
+    draw(ctx) {
+        ctx.fillStyle = this.color;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0; // reset
+    }
+}
+
+class Cake {
+    constructor(speedMultiplier = 1) {
+        this.radius = 15;
+        this.speed = (2 + Math.random() * 2) * baseSpeedMultiplier * speedMultiplier;
+        this.markedForDeletion = false;
+        
+        // 隨機決定從哪個邊緣生成 (0:上, 1:右, 2:下, 3:左)
+        let edge = Math.floor(Math.random() * 4);
+        
+        if (edge === 0) { // 上方
+            this.x = Math.random() * width;
+            this.y = -30;
+            this.vx = (Math.random() - 0.5) * this.speed;
+            this.vy = this.speed;
+        } else if (edge === 1) { // 右方
+            this.x = width + 30;
+            this.y = Math.random() * height;
+            this.vx = -this.speed;
+            this.vy = (Math.random() - 0.5) * this.speed;
+        } else if (edge === 2) { // 下方
+            this.x = Math.random() * width;
+            this.y = height + 30;
+            this.vx = (Math.random() - 0.5) * this.speed;
+            this.vy = -this.speed;
+        } else { // 左方
+            this.x = -30;
+            this.y = Math.random() * height;
+            this.vx = this.speed;
+            this.vy = (Math.random() - 0.5) * this.speed;
+        }
+    }
+    update(dt) {
+        this.x += this.vx * (dt / 16);
+        this.y += this.vy * (dt / 16);
+        
+        // 飛出畫面太遠則刪除
+        if (this.x < -100 || this.x > width + 100 || this.y < -100 || this.y > height + 100) {
+            this.markedForDeletion = true;
+        }
+    }
+    draw(ctx) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        
+        // Plate/Base
+        ctx.fillStyle = '#fbcfe8'; // pink-200
+        ctx.fillRect(-12, 0, 24, 10);
+        
+        // Icing
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(-6, 0, 6, 0, Math.PI * 2);
+        ctx.arc(6, 0, 6, 0, Math.PI * 2);
+        ctx.arc(0, -4, 6, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Cherry
+        ctx.fillStyle = '#ef4444'; // red-500
+        ctx.beginPath();
+        ctx.arc(0, -8, 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+    }
+}
+
+class HoneyJar {
+    constructor() {
+        this.radius = 16;
+        this.x = this.radius + Math.random() * (width - this.radius * 2);
+        this.y = -30;
+        this.speed = 3 * baseSpeedMultiplier;
+        this.markedForDeletion = false;
+    }
+    update(dt) {
+        this.y += this.speed * (dt / 16);
+        if (this.y > height + 50) this.markedForDeletion = true;
+    }
+    draw(ctx) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        
+        // 罐身 (橘黃色)
+        ctx.fillStyle = '#f59e0b'; // amber-500
+        ctx.beginPath();
+        ctx.arc(0, 0, this.radius, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // 蓋子/封口
+        ctx.fillStyle = '#fef3c7'; // amber-100
+        ctx.fillRect(-12, -18, 24, 6);
+        
+        // 標籤 (蜂蜜)
+        ctx.fillStyle = '#fffbeb';
+        ctx.fillRect(-10, -5, 20, 10);
+        ctx.fillStyle = '#d97706';
+        ctx.font = 'bold 10px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('蜜', 0, 0);
+
+        ctx.restore();
+    }
+}
+
+class Snake {
+    constructor(startSegments, speedMult) {
+        this.head = {
+            x: width / 2,
+            y: -100,
+            angle: Math.PI / 2, // Pointing down
+            radius: 20
+        };
+        this.baseSpeed = 3 * speedMult;
+        this.baseTurnSpeed = 0.04 * speedMult;
+        this.speed = this.baseSpeed;
+        this.turnSpeed = this.baseTurnSpeed;
+        this.segmentsCount = startSegments;
+        this.segmentRadius = 15;
+        this.history = []; // Stores previous positions for body to follow
+        this.historySpacing = 8; // Frames between segments
+        
+        // Initial history to prevent drawing glitches at start
+        for(let i=0; i < this.segmentsCount * this.historySpacing; i++){
+            this.history.push({x: this.head.x, y: this.head.y - i*2});
+        }
+    }
+
+    update(dt, cakesArr, playerPos, dynamicMultiplier = 1) {
+        if (this.segmentsCount <= 0) return;
+
+        // 套用狂暴階段的動態加速
+        this.speed = this.baseSpeed * dynamicMultiplier;
+        this.turnSpeed = this.baseTurnSpeed * dynamicMultiplier;
+
+        // 1. Determine Target (追蹤離蛇最近的蛋糕，或是玩家)
+        let target = playerPos;
+        let minDis = Infinity;
+        
+        // 尋找全場最靠近頭部的蛋糕
+        cakesArr.forEach(cake => {
+            let d = Math.hypot(cake.x - this.head.x, cake.y - this.head.y);
+            if (d < minDis) {
+                target = cake;
+                minDis = d;
+            }
+        });
+
+        // 2. Steer towards target
+        let dx = target.x - this.head.x;
+        let dy = target.y - this.head.y;
+        let targetAngle = Math.atan2(dy, dx);
+        
+        // Normalize angle difference
+        let deltaAngle = targetAngle - this.head.angle;
+        while (deltaAngle > Math.PI) deltaAngle -= Math.PI * 2;
+        while (deltaAngle < -Math.PI) deltaAngle += Math.PI * 2;
+
+        this.head.angle += deltaAngle * this.turnSpeed * (dt/16);
+
+        // 3. Move Head
+        let moveStep = this.speed * (dt/16);
+        this.head.x += Math.cos(this.head.angle) * moveStep;
+        this.head.y += Math.sin(this.head.angle) * moveStep;
+
+        // 4. Wall Bounce (Keep in bounds mostly)
+        if (this.head.x < this.head.radius) {
+            this.head.x = this.head.radius;
+            this.head.angle = Math.PI - this.head.angle;
+        } else if (this.head.x > width - this.head.radius) {
+            this.head.x = width - this.head.radius;
+            this.head.angle = Math.PI - this.head.angle;
+        }
+        if (this.head.y < -150) { // Allowed to go slightly above
+            this.head.y = -150;
+            this.head.angle = -this.head.angle;
+        }
+
+        // 5. Update History
+        this.history.unshift({x: this.head.x, y: this.head.y});
+        
+        // Trim history
+        let maxHistoryNeeded = this.segmentsCount * this.historySpacing;
+        if (this.history.length > maxHistoryNeeded) {
+            this.history.length = maxHistoryNeeded;
+        }
+    }
+
+    draw(ctx) {
+        if (this.segmentsCount <= 0) return;
+
+        let isRainbow = levelTimeLeft < 120; // 經過60秒(剩餘低於120秒)開啟彩虹模式
+        let timeNow = performance.now();
+
+        // Draw Body Segments (from tail to head)
+        for (let i = this.segmentsCount - 1; i >= 0; i--) {
+            let histIdx = i * this.historySpacing;
+            if (histIdx >= this.history.length) histIdx = this.history.length - 1;
+            let pos = this.history[histIdx];
+            if (!pos) continue;
+
+            if (isRainbow) {
+                // 柔和流動的彩虹顏色
+                ctx.fillStyle = `hsl(${(timeNow/10 + i*15) % 360}, 80%, 70%)`;
+            } else {
+                // Make colors alternate slightly
+                ctx.fillStyle = i % 2 === 0 ? '#22c55e' : '#16a34a'; // green-500 / green-600
+            }
+            
+            ctx.beginPath();
+            ctx.arc(pos.x, pos.y, this.segmentRadius, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Highlight (依比例縮放)
+            ctx.fillStyle = 'rgba(255,255,255,0.2)';
+            ctx.beginPath();
+            let sBody = this.segmentRadius / 15; // 取得目前與原版大小(15)的比例
+            ctx.arc(pos.x - 4*sBody, pos.y - 4*sBody, this.segmentRadius/2, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // Draw Head
+        ctx.save();
+        ctx.translate(this.head.x, this.head.y);
+        ctx.rotate(this.head.angle);
+
+        // Head base
+        if (isRainbow) {
+            ctx.fillStyle = `hsl(${(timeNow/10) % 360}, 80%, 60%)`;
+        } else {
+            ctx.fillStyle = '#ef4444'; // red-500
+        }
+        ctx.beginPath();
+        ctx.arc(0, 0, this.head.radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        let sHead = this.head.radius / 20; // 取得目前頭部與原版大小(20)的比例
+
+        // Eyes (依比例縮放距離與大小)
+        ctx.fillStyle = '#fef08a'; // yellow-200
+        ctx.beginPath();
+        ctx.arc(8*sHead, -8*sHead, 5*sHead, 0, Math.PI*2); // Right eye
+        ctx.arc(8*sHead, 8*sHead, 5*sHead, 0, Math.PI*2);  // Left eye
+        ctx.fill();
+
+        // Pupils
+        ctx.fillStyle = '#000';
+        ctx.beginPath();
+        ctx.arc(10*sHead, -8*sHead, 2*sHead, 0, Math.PI*2);
+        ctx.arc(10*sHead, 8*sHead, 2*sHead, 0, Math.PI*2);
+        ctx.fill();
+
+        ctx.restore();
+    }
+}
+
+class Particle {
+    constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.size = Math.random() * 4 + 2;
+        let angle = Math.random() * Math.PI * 2;
+        let speed = Math.random() * 4 + 1;
+        this.vx = Math.cos(angle) * speed;
+        this.vy = Math.sin(angle) * speed;
+        this.life = 1.0;
+        this.decay = Math.random() * 0.05 + 0.02;
+    }
+    update(dt) {
+        this.x += this.vx * (dt/16);
+        this.y += this.vy * (dt/16);
+        this.life -= this.decay * (dt/16);
+    }
+    draw(ctx) {
+        ctx.globalAlpha = Math.max(0, this.life);
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1.0;
+    }
+}
+
+// --- Game Logic ---
+
+let player;
+let snake;
+let nextCakeTime = 0;
+
+function initStars() {
+    stars = [];
+    for(let i=0; i<100; i++) stars.push(new Star());
+}
+
+function spawnParticles(x, y, color, count=10) {
+    for(let i=0; i<count; i++) {
+        particles.push(new Particle(x, y, color));
+    }
+}
+
+function updateLivesUI() {
+    livesDisplay.innerHTML = '';
+    for(let i=0; i<lives; i++) {
+        livesDisplay.innerHTML += '<span>🐝</span>';
+    }
+}
+
+function updateUltUI() {
+    ultDisplay.innerHTML = '';
+    for(let i=0; i<ultimates; i++) {
+        ultDisplay.innerHTML += '<span>⚡</span>';
+    }
+}
+
+function formatTime(seconds) {
+    let m = Math.floor(seconds / 60);
+    let s = Math.floor(seconds % 60);
+    return '0' + m + ':' + (s < 10 ? '0' : '') + s;
+}
+
+function useUltimate() {
+    if (ultimates > 0 && snake && snake.segmentsCount > 0) {
+        ultimates--;
+        updateUltUI();
+        
+        let cutCount = Math.ceil(snake.segmentsCount / 2);
+        snake.segmentsCount -= cutCount;
+        snakeLengthDisplay.innerText = snake.segmentsCount;
+        
+        // 大絕招全畫面特效 (以蛇頭為中心爆發紫色衝擊波)
+        spawnParticles(snake.head.x, snake.head.y, '#c084fc', 60);
+        
+        // 被砍掉的身體也化作粒子
+        for (let i = 0; i < cutCount; i++) {
+            let histIdx = (snake.segmentsCount + i) * snake.historySpacing;
+            if (histIdx < snake.history.length) {
+                let pos = snake.history[histIdx];
+                spawnParticles(pos.x, pos.y, '#d8b4fe', 8);
+            }
+        }
+        
+        // 分數獎勵
+        score += cutCount * 20;
+        scoreDisplay.innerText = score;
+
+        if (snake.segmentsCount <= 0) {
+            levelUp();
+        }
+    }
+}
+
+function initGame() {
+    resize();
+    input.x = width / 2;
+    input.y = height - 60; // 讓小蜜蜂一開始的目標位置在下方
+    level = 1;
+    score = 0;
+    lives = 5;
+    ultimates = 2;
+    baseSpeedMultiplier = 1;
+    levelTimeLeft = 180;
+    nextHoneySpawnTime = 150;
+    bullets = [];
+    cakes = [];
+    honeyJars = [];
+    particles = [];
+    player = new Player();
+    spawnSnake();
+    
+    updateLivesUI();
+    updateUltUI();
+    levelDisplay.innerText = level;
+    timeDisplay.innerText = formatTime(levelTimeLeft);
+    scoreDisplay.innerText = score;
+    snakeLengthDisplay.innerText = snake.segmentsCount;
+    urgentCountdown.classList.add('hidden');
+    
+    // Reset AI Area for next time
+    aiBtn.classList.remove('hidden');
+    aiBtn.disabled = false;
+    aiBtn.innerText = "✨ 聆聽蜜蜂女王的指引 ✨";
+    aiText.classList.add('hidden');
+    aiText.innerText = "";
+    
+    hud.classList.remove('hidden');
+    menuPanel.classList.add('hidden');
+    
+    GAME_STATE = 'PLAYING';
+    lastTime = performance.now();
+    requestAnimationFrame(gameLoop);
+}
+
+function spawnSnake() {
+    let startLength = 10 + (level - 1) * 3;
+    snake = new Snake(startLength, baseSpeedMultiplier);
+    snakeLengthDisplay.innerText = snake.segmentsCount;
+}
+
+function levelUp() {
+    level++;
+    baseSpeedMultiplier *= 1.15; // 增加 15% 速度
+    score += 1000;
+    levelTimeLeft = 180; // 重置時間
+    nextHoneySpawnTime = 150; // 重置蜂蜜罐掉落時間
+    lives = 5; // 每關重置5條命
+    ultimates = 2; // 每關重置2次大絕
+    honeyJars = []; // 清空畫面上的蜂蜜
+    player.fireRate = 150; // 重置小蜜蜂射擊速度
+    
+    updateLivesUI();
+    updateUltUI();
+    levelDisplay.innerText = level;
+    timeDisplay.innerText = formatTime(levelTimeLeft);
+    scoreDisplay.innerText = score;
+    urgentCountdown.classList.add('hidden');
+    
+    // Spawn explosion where it died
+    spawnParticles(snake.head.x, snake.head.y, '#ef4444', 50);
+    
+    // Brief pause before next snake
+    setTimeout(() => {
+        if(GAME_STATE === 'PLAYING') spawnSnake();
+    }, 1500);
+}
+
+function gameOver(reason = "你被貪食蛇撞毀了！") {
+    GAME_STATE = 'GAMEOVER';
+    hud.classList.add('hidden');
+    urgentCountdown.classList.add('hidden');
+    menuPanel.classList.remove('hidden');
+    menuTitle.innerText = "遊戲結束";
+    menuTitle.className = "text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500 mb-4 text-center";
+    menuSubtitle.innerHTML = reason;
+    window.lastDeathReason = reason; // Save the reason for AI Prompt
+    finalScoreEl.classList.remove('hidden');
+    finalScoreEl.innerText = `最終分數: ${score}`;
+    
+    // Setup AI Report Button
+    aiBtn.classList.remove('hidden');
+    aiBtn.disabled = false;
+    aiBtn.innerText = "✨ 請求 AI 專屬戰報 ✨";
+    aiText.classList.add('hidden');
+    
+    startBtn.innerText = "再玩一次";
+}
+
+function update(time, dt) {
+    // 處理時間終止時的爆炸動畫狀態 (不處理物理與扣血)
+    if (GAME_STATE === 'TIME_UP_ANIM') {
+        stars.forEach(s => s.update(dt));
+        particles.forEach(p => p.update(dt));
+        particles = particles.filter(p => p.life > 0);
+        return; // 終止這回合的物理更新
+    }
+
+    // 時間倒數邏輯
+    levelTimeLeft -= dt / 1000;
+    
+    // 倒數15秒的大字提示
+    if (levelTimeLeft <= 15 && levelTimeLeft > 0) {
+        urgentCountdown.classList.remove('hidden');
+        urgentCountdown.innerText = Math.ceil(levelTimeLeft);
+    } else {
+        urgentCountdown.classList.add('hidden');
+    }
+
+    // 時間到的爆炸機制
+    if (levelTimeLeft <= 0) {
+        levelTimeLeft = 0;
+        timeDisplay.innerText = "00:00";
+        urgentCountdown.classList.add('hidden');
+
+        // 貪食蛇爆走四散 (彩色極速散開)
+        if (snake && snake.segmentsCount > 0) {
+            // 頭部爆炸
+            spawnParticles(snake.head.x, snake.head.y, '#ef4444', 40); 
+            // 身體每節化為快速四散的彩色珠子
+            for (let i = 0; i < snake.segmentsCount; i++) {
+                let histIdx = i * snake.historySpacing;
+                if (histIdx < snake.history.length) {
+                    let pos = snake.history[histIdx];
+                    for (let j=0; j<6; j++) {
+                        let randomColor = `hsl(${Math.random() * 360}, 80%, 60%)`;
+                        let p = new Particle(pos.x, pos.y, randomColor);
+                        p.size = snake.segmentRadius * (Math.random() * 0.5 + 0.3); // 珠體大小
+                        p.vx *= 4; // 極快射出
+                        p.vy *= 4;
+                        p.life = 2.0; // 停留時間長一點
+                        p.decay = Math.random() * 0.01 + 0.005; // 消失得慢一點
+                        particles.push(p);
+                    }
+                }
+            }
+            snake.segmentsCount = 0; // 清除蛇
+        }
+
+        // 進入時間到動畫狀態，過 2.5 秒後才顯示 GAME OVER
+        GAME_STATE = 'TIME_UP_ANIM';
+        setTimeout(() => {
+            gameOver("時間到！貪食蛇爆走四散了！");
+        }, 2500);
+        return;
+    }
+    
+    timeDisplay.innerText = formatTime(levelTimeLeft);
+
+    // 階段性難度增加 (經過 30 秒 = 剩餘 150 秒以下)
+    let currentDynamicMultiplier = 1;
+    let currentCakeSpawnDelay = Math.max(800, 2000 - level * 150);
+
+    if (levelTimeLeft < 150) {
+        // 每少一秒，貪食蛇與蛋糕速度倍率漸漸增加
+        currentDynamicMultiplier += (150 - levelTimeLeft) * 0.01; 
+        // 蛋糕掉落頻率變快 (延遲時間依時間等比縮短)
+        currentCakeSpawnDelay *= (levelTimeLeft / 150) * 0.5 + 0.5;
+    }
+
+    // 貪食蛇每 30 秒變大 (180秒開始，經過每30秒增加0.5倍)
+    if (snake) {
+        let timeElapsed = 180 - levelTimeLeft;
+        let currentSizeMultiplier = 1 + Math.floor(timeElapsed / 30) * 0.5; // 例如: 0秒=1倍, 30秒=1.5倍, 60秒=2倍...
+        snake.head.radius = 20 * currentSizeMultiplier;
+        snake.segmentRadius = 15 * currentSizeMultiplier;
+    }
+
+    // 蜂蜜罐掉落邏輯 (每30秒)
+    if (levelTimeLeft <= nextHoneySpawnTime) {
+        honeyJars.push(new HoneyJar());
+        nextHoneySpawnTime -= 30; // 下一次掉落的時間點
+    }
+
+    // Background stars
+    stars.forEach(s => s.update(dt));
+
+    // Player
+    player.update(dt, time);
+
+    // Cake Spawning
+    if (time > nextCakeTime) {
+        // 給新生成的蛋糕套上動態加速
+        cakes.push(new Cake(currentDynamicMultiplier));
+        nextCakeTime = time + currentCakeSpawnDelay;
+    }
+
+    // Update Entities
+    bullets.forEach(b => b.update(dt));
+    cakes.forEach(c => c.update(dt));
+    honeyJars.forEach(h => h.update(dt));
+    particles.forEach(p => p.update(dt));
+    
+    if (snake && snake.segmentsCount > 0) {
+        // 貪食蛇套用動態加速
+        snake.update(dt, cakes, player, currentDynamicMultiplier);
+    }
+
+    // --- Collisions ---
+
+    // Bullet vs Snake & Cakes
+    for (let i = bullets.length - 1; i >= 0; i--) {
+        let b = bullets[i];
+        let hitSomething = false;
+
+        // Bullet vs Cakes
+        for (let j = cakes.length - 1; j >= 0; j--) {
+            let c = cakes[j];
+            let dist = Math.hypot(b.x - c.x, b.y - c.y);
+            if (dist < b.radius + c.radius) {
+                // Destroy cake
+                spawnParticles(c.x, c.y, '#fbcfe8', 15);
+                cakes.splice(j, 1);
+                hitSomething = true;
+                score += 50; // Bonus for denying food
+                scoreDisplay.innerText = score;
+                break;
+            }
+        }
+
+        // Bullet vs Snake
+        if (!hitSomething && snake && snake.segmentsCount > 0) {
+            let hitSnake = false;
+            let hitX = 0, hitY = 0;
+
+            // Check Head
+            if (Math.hypot(b.x - snake.head.x, b.y - snake.head.y) < b.radius + snake.head.radius) {
+                hitSnake = true;
+                hitX = snake.head.x; hitY = snake.head.y;
+            } else {
+                // Check Body
+                for (let k = 0; k < snake.segmentsCount; k++) {
+                    let histIdx = k * snake.historySpacing;
+                    if (histIdx < snake.history.length) {
+                        let pos = snake.history[histIdx];
+                        if (Math.hypot(b.x - pos.x, b.y - pos.y) < b.radius + snake.segmentRadius) {
+                            hitSnake = true;
+                            hitX = pos.x; hitY = pos.y;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (hitSnake) {
+                hitSomething = true;
+                snake.segmentsCount--;
+                snakeLengthDisplay.innerText = snake.segmentsCount;
+                score += 10;
+                scoreDisplay.innerText = score;
+                spawnParticles(hitX, hitY, '#22c55e', 10);
+
+                if (snake.segmentsCount <= 0) {
+                    levelUp();
+                }
+            }
+        }
+
+        if (hitSomething) {
+            b.markedForDeletion = true;
+        }
+    }
+
+    // Snake vs Cakes (Eating)
+    if (snake && snake.segmentsCount > 0) {
+        for (let j = cakes.length - 1; j >= 0; j--) {
+            let c = cakes[j];
+            if (Math.hypot(snake.head.x - c.x, snake.head.y - c.y) < snake.head.radius + c.radius) {
+                // Snake eats cake
+                spawnParticles(c.x, c.y, '#ef4444', 15);
+                cakes.splice(j, 1);
+                snake.segmentsCount += 3; // Grows by 3 segments!
+                snakeLengthDisplay.innerText = snake.segmentsCount;
+                // Add some artificial history to prevent instant visual popping of new segments
+                for(let v=0; v<3 * snake.historySpacing; v++){
+                    let lastPos = snake.history[snake.history.length-1] || {x: snake.head.x, y: snake.head.y};
+                    snake.history.push({x: lastPos.x, y: lastPos.y});
+                }
+            }
+        }
+    }
+
+    // Snake vs Player (Game Over / Lose Life)
+    if (snake && snake.segmentsCount > 0) {
+        let playerHitboxRadius = 15;
+        let crashed = false;
+
+        // Check Head
+        if (Math.hypot(player.x - snake.head.x, player.y - snake.head.y) < playerHitboxRadius + snake.head.radius) {
+            crashed = true;
+        } else {
+            // Check Body
+            for (let k = 0; k < snake.segmentsCount; k++) {
+                let histIdx = k * snake.historySpacing;
+                if (histIdx < snake.history.length) {
+                    let pos = snake.history[histIdx];
+                    if (Math.hypot(player.x - pos.x, player.y - pos.y) < playerHitboxRadius + snake.segmentRadius) {
+                        crashed = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (crashed) {
+            if (player.invulnerable <= 0) {
+                spawnParticles(player.x, player.y, '#38bdf8', 40);
+                lives--;
+                updateLivesUI();
+                
+                if (lives > 0) {
+                    // 還有生命：給予無敵時間，並稍微將玩家重置到較安全的地方(畫面下方)
+                    player.invulnerable = 2000; // 無敵 2 秒
+                    player.x = width / 2;
+                    player.y = height - 60;
+                    input.x = width / 2;
+                    input.y = height - 60;
+                } else {
+                    gameOver("你被貪食蛇撞毀了！");
+                }
+            }
+        }
+    }
+
+    // Player vs Honey Jars (Power up)
+    for (let i = honeyJars.length - 1; i >= 0; i--) {
+        let h = honeyJars[i];
+        // 如果小蜜蜂碰到蜂蜜罐
+        if (Math.hypot(player.x - h.x, player.y - h.y) < player.width/2 + h.radius) {
+            spawnParticles(h.x, h.y, '#f59e0b', 20); // 橘色爆發粒子
+            player.fireRate = Math.max(40, player.fireRate - 35); // 射速變快，最低40ms
+            score += 200;
+            scoreDisplay.innerText = score;
+            honeyJars.splice(i, 1);
+        }
+    }
+
+    // Cleanup arrays
+    bullets = bullets.filter(b => !b.markedForDeletion);
+    cakes = cakes.filter(c => !c.markedForDeletion);
+    honeyJars = honeyJars.filter(h => !h.markedForDeletion);
+    particles = particles.filter(p => p.life > 0);
+}
+
+function draw() {
+    // Clear Background (with slight trailing effect)
+    ctx.fillStyle = 'rgba(15, 23, 42, 1)'; // Tailwind slate-900
+    ctx.fillRect(0, 0, width, height);
+
+    // Draw Stars
+    stars.forEach(s => s.draw(ctx));
+
+    // Draw Entities
+    cakes.forEach(c => c.draw(ctx));
+    honeyJars.forEach(h => h.draw(ctx));
+    bullets.forEach(b => b.draw(ctx));
+    
+    if (snake && snake.segmentsCount > 0) {
+        snake.draw(ctx);
+    }
+    
+    if (GAME_STATE === 'PLAYING' || GAME_STATE === 'TIME_UP_ANIM') {
+        player.draw(ctx);
+    }
+
+    particles.forEach(p => p.draw(ctx));
+}
+
+function gameLoop(time) {
+    if (GAME_STATE !== 'PLAYING' && GAME_STATE !== 'TIME_UP_ANIM') return;
+
+    let dt = time - lastTime;
+    // Cap dt to prevent huge jumps if tab is inactive
+    if (dt > 50) dt = 16; 
+    lastTime = time;
+
+    update(time, dt);
+    draw();
+
+    animationId = requestAnimationFrame(gameLoop);
+}
+
+// Initial Setup
+resize();
+startBtn.addEventListener('click', initGame);
+
+// AI Button Logic
+aiBtn.addEventListener('click', async () => {
+    aiBtn.disabled = true;
+    aiText.classList.remove('hidden');
+    
+    if (GAME_STATE === 'GAMEOVER') {
+        aiBtn.innerText = "✨ 戰報生成中...";
+        aiText.innerText = "正在聯絡星際總部接收戰報...";
+        // 將玩家實際的遊戲數據帶入 Prompt，讓 LLM 生成專屬戰報
+        const prompt = `你是一個幽默的星際冒險家公會播報員。玩家剛結束了一場對抗「星際貪食蛇」的遊戲。
+玩家成績：達到關卡 ${level}，最終分數 ${score} 分。
+失敗原因：${window.lastDeathReason}。
+請用繁體中文寫一段約 50~80 字的趣味戰報，給予玩家充滿戲劇性的評價與嘲諷，語氣要誇張好笑。直接輸出內文，不需 markdown 標籤。`;
+        const report = await fetchGeminiWithRetry(prompt);
+        aiText.innerText = report;
+        aiBtn.classList.add('hidden');
+    } else {
+        aiBtn.innerText = "✨ 接收訊號中...";
+        aiText.innerText = "正在連接蜜蜂女王的星際頻段...";
+        // 戰前由 LLM 扮演角色給予隨機回饋
+        const prompt = `你是一位高傲但愛護部下的「星際蜜蜂女王」。你的工蜂（玩家）即將出發對抗宇宙中的危險生物「星際貪食蛇」。請用繁體中文給予玩家一句大約 30~50 字的戰前鼓勵或幽默的警告。直接輸出內文，不需 markdown 標籤。`;
+        const quote = await fetchGeminiWithRetry(prompt);
+        aiText.innerText = quote;
+        aiBtn.classList.add('hidden');
+    }
+});
+
+</script>
+</body>
+</html>
