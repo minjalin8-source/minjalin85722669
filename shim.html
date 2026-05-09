@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<!-- saved from url=(0132)blob:https://1q8mytrjw5j0jlrgytkbx3jjby458xzk2uzkhfxn1ya3vt9eir-h906969431.scf.usercontent.goog/361146d4-067f-4a57-82bc-379e40c20811 -->
+<html lang="zh-TW"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script>(function(firebaseConfig, initialAuthToken, appId) {
+        window.__firebase_config = firebaseConfig;
+        window.__initial_auth_token = initialAuthToken;
+        window.__app_id = appId;
+            })("\n{\n  \"apiKey\": \"AIzaSyCqyCcs2R2e7AegGjvFAwG98wlamtbHvZY\",\n  \"authDomain\": \"bard-frontend.firebaseapp.com\",\n  \"projectId\": \"bard-frontend\",\n  \"storageBucket\": \"bard-frontend.firebasestorage.app\",\n  \"messagingSenderId\": \"175205271074\",\n  \"appId\": \"1:175205271074:web:2b7bd4d34d33bf38e6ec7b\"\n}\n","eyJhbGciOiJSUzI1NiIsImtpZCI6Ijg4OWY4ODcxMTZjMzU5OGVmZDZlZWU4ODA4YjhhZWYwMTIwYmFjOWYiLCJ0eXAiOiJKV1QifQ.eyJzdWIiOiJmaXJlYmFzZS1hZG1pbnNkay1mYnN2Y0BiYXJkLWZyb250ZW5kLmlhbS5nc2VydmljZWFjY291bnQuY29tIiwiYXVkIjoiaHR0cHM6Ly9pZGVudGl0eXRvb2xraXQuZ29vZ2xlYXBpcy5jb20vZ29vZ2xlLmlkZW50aXR5LmlkZW50aXR5dG9vbGtpdC52MS5JZGVudGl0eVRvb2xraXQiLCJ1aWQiOiIxMTUwNDI1NTUxMzk4NDI4Mjk3MyIsImlzcyI6ImZpcmViYXNlLWFkbWluc2RrLWZic3ZjQGJhcmQtZnJvbnRlbmQuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20iLCJjbGFpbXMiOnsiYXBwSWQiOiJjX2E0NmMwM2MyMDgzOWMwNjNfaW5kZXguaHRtbC01MyJ9LCJleHAiOjE3NzgzMTQwNDMsImlhdCI6MTc3ODMxMDQ0MywiYWxnIjoiUlMyNTYifQ.u2sH6xxkJVsjcU_VTm5k0tCUvqYj8qC0Jtqz-5A54QQvX4JOjxHUlp6t9aweY33O4dbMBWBbaxBcpxn8RVgXXyZALInrk_1nBf_-Kc3RxZw0IR9-807nG8Y-aEpmD9W2PtHaRLLp5c7IIzhMtUov2-rQYXrhO20uiNz_f7ZR15cGgCEsRam5x88p7ZjqPPtx92J-p_szzmX9P_zpVgLbUUiITW7YU2ys3z6Mb4v7-6ZYGZ1yY-tuaBPFU5gsxjrMM73GcHOrF9lsHiquR04NO18vvgBYQQxVNOLAtPI6vJBJK8DTgU0yCFQCli6ojxEwaiB-Fdkt1wGHA_MmgHu6Bw","c_a46c03c20839c063_index.html-53")</script><script>(function(){'use strict';var h=typeof Object.defineProperties=="function"?Object.defineProperty:function(a,b,d){if(a==Array.prototype||a==Object.prototype)return a;a[b]=d.value;return a};function l(a){a=["object"==typeof globalThis&&globalThis,a,"object"==typeof window&&window,"object"==typeof self&&self,"object"==typeof global&&global];for(var b=0;b<a.length;++b){var d=a[b];if(d&&d.Math==Math)return d}throw Error("Cannot find global object");}var n=l(this);
+function p(a,b){if(b)a:{var d=n;a=a.split(".");for(var c=0;c<a.length-1;c++){var e=a[c];if(!(e in d))break a;d=d[e]}a=a[a.length-1];c=d[a];b=b(c);b!=c&&b!=null&&h(d,a,{configurable:!0,writable:!0,value:b})}}function r(a){function b(c){return a.next(c)}function d(c){return a.throw(c)}return new Promise(function(c,e){function f(g){g.done?c(g.value):Promise.resolve(g.value).then(b,d).then(f,e)}f(a.next())})}function t(a){return r(a())}
+p("Object.values",function(a){return a?a:function(b){var d=[],c;for(c in b)Object.prototype.hasOwnProperty.call(b,c)&&d.push(b[c]);return d}});p("Array.prototype.includes",function(a){return a?a:function(b,d){var c=this;c instanceof String&&(c=String(c));var e=c.length;d=d||0;for(d<0&&(d=Math.max(d+e,0));d<e;d++){var f=c[d];if(f===b||Object.is(f,b))return!0}return!1}});/*
+
+ MIT License
+
+ Copyright (c) 2017-2023 W.Y.
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+
+*/
+function u(a,b){var d=a.style;b.backgroundColor&&(d.backgroundColor=b.backgroundColor);b.width&&(d.width=`${b.width}px`);b.height&&(d.height=`${b.height}px`);var c=b.style;c!=null&&Object.keys(c).forEach(e=>{d[e]=c[e]})};var v=(()=>{var a=0;return()=>{a+=1;return`u${`0000${(Math.random()*1679616<<0).toString(36)}`.slice(-4)}${a}`}})();function w(a){var b=[];for(let d=0,c=a.length;d<c;d++)b.push(a[d]);return b}let x=null;function y(a={}){return x?x:a.l?x=a.l:x=w(window.getComputedStyle(document.documentElement))}function z(a,b){return(a=(a.ownerDocument.defaultView||window).getComputedStyle(a).getPropertyValue(b))?parseFloat(a.replace("px","")):0}
+function A(a,b={}){var d;if(!(d=b.width)){d=z(a,"border-left-width");var c=z(a,"border-right-width");d=a.clientWidth+d+c}(b=b.height)||(b=z(a,"border-top-width"),c=z(a,"border-bottom-width"),b=a.clientHeight+b+c);return{width:d,height:b}}function B(a){return new Promise((b,d)=>{var c=new Image;c.onload=()=>{c.decode().then(()=>{requestAnimationFrame(()=>b(c))})};c.onerror=d;c.crossOrigin="anonymous";c.decoding="async";c.src=a})}
+function C(a){return t(function*(){return Promise.resolve().then(()=>(new XMLSerializer).serializeToString(a)).then(encodeURIComponent).then(b=>`data:image/svg+xml;charset=utf-8,${b}`)})}
+function D(a,b,d){return t(function*(){var c=document.createElementNS("http://www.w3.org/2000/svg","svg"),e=document.createElementNS("http://www.w3.org/2000/svg","foreignObject");c.setAttribute("width",`${b}`);c.setAttribute("height",`${d}`);c.setAttribute("viewBox",`0 0 ${b} ${d}`);e.setAttribute("width","100%");e.setAttribute("height","100%");e.setAttribute("x","0");e.setAttribute("y","0");e.setAttribute("externalResourcesRequired","true");c.appendChild(e);e.appendChild(a);return C(c)})}
+var E=(a,b)=>{if(a instanceof b)return!0;a=Object.getPrototypeOf(a);return a===null?!1:a.constructor.name===b.name||E(a,b)};function F(a,b){return y(b).map(d=>{var c=a.getPropertyValue(d),e=a.getPropertyPriority(d);return`${d}: ${c}${e?" !important":""};`}).join(" ")}
+function G(a,b,d,c){a=window.getComputedStyle(a,d);var e=a.getPropertyValue("content");if(e!==""&&e!=="none"){var f=v();try{b.className=`${b.className} ${f}`}catch(k){return}e=document.createElement("style");var g=e.appendChild;d=`.${f}:${d}`;a.cssText?(c=a.getPropertyValue("content"),c=`${a.cssText} content: '${c.replace(/'|"/g,"")}';`):c=F(a,c);g.call(e,document.createTextNode(`${d}{${c}}`));b.appendChild(e)}};function H(a){return a.search(/^(data:)/)!==-1}function I(a,b,d){return t(function*(){var c=yield fetch(a,b);if(c.status===404)throw Error(`Resource "${c.url}" not found`);var e=yield c.blob();return new Promise((f,g)=>{var k=new FileReader;k.onerror=g;k.onloadend=()=>{try{f(d({o:c,result:k.result}))}catch(m){g(m)}};k.readAsDataURL(e)})})}const J={};function K(a,b,d){var c=a.replace(/\?.*/,"");d&&(c=a);/ttf|otf|eot|woff2?/i.test(c)&&(c=c.replace(/.*\//,""));return b?`[${b}]${c}`:c}
+function L(a,b,d){return t(function*(){var c=K(a,b,d.C);if(J[c]!=null)return J[c];d.u&&(a+=(/\?/.test(a)?"&":"?")+(new Date).getTime());try{let f=yield I(a,d.i,({o:g,result:k})=>{b||(b=g.headers.get("Content-Type")||"");return k.split(/,/)[1]});var e=`data:${b};base64,${f}`}catch(f){e=d.B||""}return J[c]=e})};const M={P:"application/font-woff",R:"application/font-woff",N:"application/font-truetype",v:"application/vnd.ms-fontobject",H:"image/png",F:"image/jpeg",D:"image/jpeg",A:"image/gif",M:"image/tiff",L:"image/svg+xml",O:"image/webp"};function N(a){return(a=/\.([^./]*?)$/g.exec(a))?a[1]:""};function O(a){return t(function*(){var b=a.toDataURL();return b==="data:,"?a.cloneNode(!1):B(b)})}function aa(a,b){return t(function*(){if(a.currentSrc){var d=document.createElement("canvas");let c=d.getContext("2d");d.width=a.clientWidth;d.height=a.clientHeight;c==null||c.drawImage(a,0,0,d.width,d.height);d=d.toDataURL();return B(d)}d=a.poster;d=yield L(d,M[N(d).toLowerCase()]||"",b);return B(d)})}
+function ba(a,b){return t(function*(){try{let d;if(a==null?0:(d=a.contentDocument)==null?0:d.body)return yield P(a.contentDocument.body,b,!0)}catch(d){}return a.cloneNode(!1)})}function ca(a,b){return t(function*(){return E(a,HTMLCanvasElement)?O(a):E(a,HTMLVideoElement)?aa(a,b):E(a,HTMLIFrameElement)?ba(a,b):a.cloneNode(a.tagName!=null&&a.tagName.toUpperCase()==="SVG")})}
+function da(a,b,d){return t(function*(){if(b.tagName!=null&&b.tagName.toUpperCase()==="SVG")return b;var c=[];if(a.tagName!=null&&a.tagName.toUpperCase()==="SLOT"&&a.assignedNodes)c=w(a.assignedNodes());else{let e;if(E(a,HTMLIFrameElement)&&((e=a.contentDocument)==null?0:e.body))c=w(a.contentDocument.body.childNodes);else{let f;c=w(((f=a.shadowRoot)!=null?f:a).childNodes)}}if(c.length===0||E(a,HTMLVideoElement))return b;yield c.reduce((e,f)=>e.then(()=>P(f,d)).then(g=>{g&&b.appendChild(g)}),Promise.resolve());
+return b})}function ea(a,b,d){var c=b.style;if(c){var e=window.getComputedStyle(a);e.cssText?(c.cssText=e.cssText,c.transformOrigin=e.transformOrigin):y(d).forEach(f=>{var g=e.getPropertyValue(f);f==="font-size"&&g.endsWith("px")&&(g=`${Math.floor(parseFloat(g.substring(0,g.length-2)))-.1}px`);E(a,HTMLIFrameElement)&&f==="display"&&g==="inline"&&(g="block");f==="d"&&b.getAttribute("d")&&(g=`path(${b.getAttribute("d")})`);c.setProperty(f,g,e.getPropertyPriority(f))})}}
+function fa(a,b){E(a,HTMLSelectElement)&&(b=Array.from(b.children).find(d=>a.value===d.getAttribute("value")))&&b.setAttribute("selected","")}
+function ha(a,b){return t(function*(){var d=a.querySelectorAll?a.querySelectorAll("use"):[];if(d.length===0)return a;var c={};for(var e=0;e<d.length;e++){var f=d[e].getAttribute("xlink:href");if(f){let g=document.querySelector(f);a.querySelector(f)||!g||c[f]||(c[f]=yield P(g,b,!0))}}d=Object.values(c);if(d.length){c=document.createElementNS("http://www.w3.org/1999/xhtml","svg");c.setAttribute("xmlns","http://www.w3.org/1999/xhtml");c.style.position="absolute";c.style.width="0";c.style.height="0";
+c.style.overflow="hidden";c.style.display="none";e=document.createElementNS("http://www.w3.org/1999/xhtml","defs");c.appendChild(e);for(f=0;f<d.length;f++)e.appendChild(d[f]);a.appendChild(c)}return a})}
+function P(a,b,d){return t(function*(){return d||!b.filter||b.filter(a)?Promise.resolve(a).then(c=>ca(c,b)).then(c=>da(a,c,b)).then(c=>{E(c,Element)&&(ea(a,c,b),G(a,c,":before",b),G(a,c,":after",b),E(a,HTMLTextAreaElement)&&(c.textContent=a.value),E(a,HTMLInputElement)&&c.setAttribute("value",a.value),fa(a,c));return c}).then(c=>ha(c,b)):null})};const Q=/url\((['"]?)([^'"]+?)\1\)/g,ia=/url\([^)]+\)\s*format\((["']?)([^"']+)\1\)/g,ja=/src:\s*(?:url\([^)]+\)\s*format\([^)]+\)[,;]\s*)+/g;function ka(a){var b=[];a.replace(Q,(d,c,e)=>{b.push(e);return d});return b.filter(d=>!H(d))}
+function la(a,b,d,c){return t(function*(){try{let e=d?(new URL(b,d||void 0)).toString():b,f;f=yield L(e,M[N(b).toLowerCase()]||"",c);return a.replace(new RegExp(`(url\\(['"]?)(${b.replace(/([.*+?^${}()|\[\]\/\\])/g,"\\$1")})(['"]?\\))`,"g"),`$1${f}$3`)}catch(e){}return a})}function ma(a,{I:b}){return b?a.replace(ja,d=>{for(;;){let [c,,e]=ia.exec(d)||[];if(!e)return"";if(e===b)return`src: ${c};`}}):a}
+function R(a,b,d){return t(function*(){if(a.search(Q)===-1)return a;var c=ma(a,d);return ka(c).reduce((e,f)=>e.then(g=>la(g,f,b,d)),Promise.resolve(c))})};function S(a,b,d){return t(function*(){var c,e=(c=b.style)==null?void 0:c.getPropertyValue(a);return e?(c=yield R(e,null,d),b.style.setProperty(a,c,b.style.getPropertyPriority(a)),!0):!1})}function na(a,b){return t(function*(){(yield S("background",a,b))||(yield S("background-image",a,b));(yield S("mask",a,b))||(yield S("-webkit-mask",a,b))||(yield S("mask-image",a,b))||(yield S("-webkit-mask-image",a,b))})}
+function oa(a,b){return t(function*(){var d=E(a,HTMLImageElement);if(d&&!H(a.src)||E(a,SVGImageElement)&&!H(a.href.baseVal)){var c=d?a.src:a.href.baseVal,e=yield L(c,M[N(c).toLowerCase()]||"",b);yield new Promise((f,g)=>{a.onload=f;a.onerror=b.m?(...k)=>{try{f(b.m(...k))}catch(m){g(m)}}:g;a.decode&&(a.decode=f);a.loading==="lazy"&&(a.loading="eager");d?(a.srcset="",a.src=e):a.href.baseVal=e})}})}
+function pa(a,b){return t(function*(){var d=w(a.childNodes).map(c=>T(c,b));yield Promise.all(d).then(()=>a)})}function T(a,b){return t(function*(){E(a,Element)&&(yield na(a,b),yield oa(a,b),yield pa(a,b))})};const U={};function V(a){return t(function*(){var b=U[a];if(b!=null)return b;b=yield(yield fetch(a)).text();b={url:a,cssText:b};return U[a]=b})}function W(a,b){return t(function*(){var d=a.cssText,c=/url\(["']?([^"')]+)["']?\)/g,e=(d.match(/url\([^)]+\)/g)||[]).map(f=>t(function*(){var g=f.replace(c,"$1");g.startsWith("https://")||(g=(new URL(g,a.url)).href);return I(g,b.i,({result:k})=>{d=d.replace(f,`url(${k})`);return[f,k]})}));return Promise.all(e).then(()=>d)})}
+function X(a){if(a==null)return[];var b=[];a=a.replace(/(\/\*[\s\S]*?\*\/)/gi,"");for(var d=RegExp("((@.*?keyframes [\\s\\S]*?){([\\s\\S]*?}\\s*?)})","gi");;){var c=d.exec(a);if(c===null)break;b.push(c[0])}a=a.replace(d,"");d=/@import[\s\S]*?url\([^)]*\)[\s\S]*?;/gi;for(c=RegExp("((\\s*?(?:\\/\\*[\\s\\S]*?\\*\\/)?\\s*?@media[\\s\\S]*?){([\\s\\S]*?)}\\s*?})|(([\\s\\S]*?){([\\s\\S]*?)})","gi");;){let e=d.exec(a);if(e===null)if(e=c.exec(a),e===null)break;else d.lastIndex=c.lastIndex;else c.lastIndex=
+d.lastIndex;b.push(e[0])}return b}
+function qa(a,b){return t(function*(){var d=[],c=[];a.forEach(e=>{if("cssRules"in e)try{w(e.cssRules||[]).forEach((f,g)=>{if(f.type===CSSRule.IMPORT_RULE){let k=g+1;f=V(f.href).then(m=>W(m,b)).then(m=>X(m).forEach(q=>{try{e.insertRule(q,q.startsWith("@import")?k+=1:e.cssRules.length)}catch(Da){}})).catch(()=>{});c.push(f)}})}catch(f){let g=a.find(k=>k.href==null)||document.styleSheets[0];e.href!=null&&c.push(V(e.href).then(k=>W(k,b)).then(k=>X(k).forEach(m=>{g.insertRule(m,g.cssRules.length)})).catch(()=>
+{}))}});return Promise.all(c).then(()=>{a.forEach(e=>{if("cssRules"in e)try{w(e.cssRules||[]).forEach(f=>{d.push(f)})}catch(f){}});return d})})}function ra(a){return a.filter(b=>b.type===CSSRule.FONT_FACE_RULE).filter(b=>b.style.getPropertyValue("src").search(Q)!==-1)}function sa(a,b){return t(function*(){if(a.ownerDocument==null)throw Error("Provided element is not within a Document");var d=w(a.ownerDocument.styleSheets);d=yield qa(d,b);return ra(d)})}
+function ta(a){function b(c){(c.style.fontFamily||getComputedStyle(c).fontFamily).split(",").forEach(e=>{d.add(e.trim().replace(/["']/g,""))});Array.from(c.children).forEach(e=>{e instanceof HTMLElement&&b(e)})}var d=new Set;b(a);return d}function ua(a,b){return t(function*(){var d=yield sa(a,b),c=ta(a);return(yield Promise.all(d.filter(e=>c.has(e.style.fontFamily.trim().replace(/["']/g,""))).map(e=>R(e.cssText,e.parentStyleSheet?e.parentStyleSheet.href:null,b)))).join("\n")})}
+function va(a,b){return t(function*(){var d=b.j!=null?b.j:b.K?null:yield ua(a,b);if(d){let c=document.createElement("style");c.appendChild(document.createTextNode(d));a.firstChild?a.insertBefore(c,a.firstChild):a.appendChild(c)}})};function wa(a,b={}){return t(function*(){var {width:d,height:c}=A(a,b),e=yield P(a,b,!0);yield va(e,b);yield T(e,b);u(e,b);return yield D(e,d,c)})}
+function xa(a,b={}){return t(function*(){var {width:d,height:c}=A(a,b),e=yield wa(a,b);e=yield B(e);var f=document.createElement("canvas"),g=f.getContext("2d"),k=b.G||window.devicePixelRatio||1,m=b.h||d,q=b.g||c;f.width=m*k;f.height=q*k;!b.J&&(f.width>16384||f.height>16384)&&(f.width>16384&&f.height>16384?f.width>f.height?(f.height*=16384/f.width,f.width=16384):(f.width*=16384/f.height,f.height=16384):f.width>16384?(f.height*=16384/f.width,f.width=16384):(f.width*=16384/f.height,f.height=16384));
+f.style.width=`${m}`;f.style.height=`${q}`;b.backgroundColor&&(g.fillStyle=b.backgroundColor,g.fillRect(0,0,f.width,f.height));g.drawImage(e,0,0,f.width,f.height);return f})}function ya(a,b={}){return t(function*(){return(yield xa(a,b)).toDataURL()})};const za=["gemini.google.com","corp.google.com","proxy.googlers.com"];function Y(){return document.body.querySelectorAll('[class*="animate"]').length>0}function Z(a){return t(function*(){try{return yield ya(a,{h:a.offsetWidth,g:a.offsetHeight})}catch(d){var b=a.offsetHeight;let c=document.createElement("canvas");c.width=a.offsetWidth;c.height=b;return c.toDataURL("image/png")}})}
+function Aa(){return t(function*(){var a=document.body.offsetWidth,b=document.body.offsetHeight,d=document.body.cloneNode(!0);d.querySelectorAll('[class*="animate"]').forEach(c=>{c.classList.remove(...Array.from(c.classList).filter(e=>e.startsWith("animate")))});d.style.width=`${a}px`;d.style.height=`${b}px`;return d})}
+function Ba(a){return t(function*(){var b=document.body;if(Y()){var d=yield Aa();b=d;document.body.appendChild(d)}d=yield Z(b);Y()&&document.body.removeChild(b);window.parent.postMessage({type:"SEND_SCREENSHOT",image:d,topOffset:document.documentElement.scrollTop},a.origin)})}function Ca(a){return t(function*(){var b={type:"SEND_SCREENSHOT_FOR_DATA_VISUALIZATION",image:yield Z(document.body),topOffset:0};window.parent.postMessage(b,a.origin)})}
+window.addEventListener("message",a=>t(function*(){if(za.some(d=>a.origin.includes(d))){var b=a.data;b&&(b.type==="MAKE_SCREENSHOT"&&(yield Ba(a)),b.type==="MAKE_SCREENSHOT_FOR_DATA_VISUALIZATION"&&(yield Ca(a)))}}));
+})();</script><script>(function() {
+  // Ensure this script is executed only once
+  if (window.firebaseAuthBridgeScriptLoaded) {
+    return;
+  }
+  window.firebaseAuthBridgeScriptLoaded = true;
+
+  let nextTokenPromiseId = 0;
+
+  // Stores { resolve, reject } for ongoing token requests
+  const pendingTokenPromises = {};
+
+  // Listen for messages from the Host Application
+  window.addEventListener('message', function(event) {
+
+    const messageData = event.data;
+
+  if (messageData && messageData.type === 'RESOLVE_NEW_FIREBASE_TOKEN') {
+      const { success, token, error, promiseId } = messageData ?? {};
+      if (pendingTokenPromises[promiseId]) {
+        if (success) {
+          pendingTokenPromises[promiseId].resolve(token);
+        } else {
+          pendingTokenPromises[promiseId].reject(new Error(error || 'Token refresh failed from host.'));
+        }
+        delete pendingTokenPromises[promiseId];
+      }
+    }
+  });
+
+  // Expose a function for the Generated App to request a new Firebase token
+  window.requestNewFirebaseToken = function() {
+    const currentPromiseId = nextTokenPromiseId++;
+    const promise = new Promise((resolve, reject) => {
+      pendingTokenPromises[currentPromiseId] = { resolve, reject };
+    });
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({
+        type: 'REQUEST_NEW_FIREBASE_TOKEN',
+        promiseId: currentPromiseId
+      }, '*');
+    } else {
+      pendingTokenPromises[currentPromiseId].reject(new Error('No parent window to request token from.'));
+      delete pendingTokenPromises[currentPromiseId];
+    }
+    return promise;
+  };
+})();</script><script>
+let realOriginalGetUserMedia = null;
+if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+  realOriginalGetUserMedia = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
+}
+
+(function() {
+  if (navigator.mediaDevices && navigator.mediaDevices.__proto__) {
+    try {
+      Object.defineProperty(navigator.mediaDevices.__proto__, 'getUserMedia', {
+        get: function() {
+          return undefined; // Or throw an error
+        },
+        configurable: false
+      });
+    } catch (error) {
+      console.error("Error defining prototype getter:", error);
+    }
+  }
+})();
+
+(function() {
+  const pendingMediaResolvers = {};
+  let nextMediaPromiseId = 0;
+
+  function requestMediaPermissions(constraints) {
+    const mediaPromiseId = nextMediaPromiseId++;
+    const promise = new Promise((resolve, reject) => {
+      pendingMediaResolvers[mediaPromiseId] = (granted) => {
+        delete pendingMediaResolvers[mediaPromiseId];
+        resolve(granted);
+      };
+    });
+
+    window.parent.postMessage({
+      type: 'requestMediaPermission',
+      constraints: constraints,
+      promiseId: mediaPromiseId,
+    }, '*');
+
+    return promise;
+  }
+
+  let originalGetUserMedia = realOriginalGetUserMedia;
+
+  function interceptGetUserMedia() {
+    if (navigator.mediaDevices) {
+      Object.defineProperty(navigator.mediaDevices, 'getUserMedia', {
+        value: function(constraints) {
+          return requestMediaPermissions(constraints).then((granted) => {
+            if (granted) {
+              if (originalGetUserMedia) {
+                return originalGetUserMedia(constraints);
+              } else {
+                throw new Error("Original getUserMedia not available.");
+              }
+            } else {
+              throw new DOMException('Permission denied', 'NotAllowedError');
+            }
+          });
+        },
+        writable: false,
+        configurable: false
+      });
+    }
+  }
+
+  interceptGetUserMedia();
+
+  const observer = new MutationObserver(function(mutationsList, observer) {
+    for (const mutation of mutationsList) {
+      if (mutation.type === 'reconfigured' && mutation.name === 'getUserMedia' && mutation.object === navigator.mediaDevices) {
+        interceptGetUserMedia();
+      } else if (mutation.type === 'attributes' && mutation.attributeName === 'getUserMedia' && mutation.target === navigator.mediaDevices) {
+        interceptGetUserMedia();
+      } else if (mutation.type === 'childList' && mutation.addedNodes) {
+        mutation.addedNodes.forEach(node => {
+          if (node === navigator.mediaDevices) {
+            interceptGetUserMedia();
+          }
+        });
+      }
+    }
+  });
+
+  function interceptSpeechRecognition() {
+    if (!window.SpeechRecognition && !window.webkitSpeechRecognition) {
+      return;
+    }
+
+    const OriginalSpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    const SpeechRecognitionWrapper = function(...args) {
+      const recognizer = new OriginalSpeechRecognition(...args);
+      const originalStart = recognizer.start.bind(recognizer);
+
+      recognizer.start = function() {
+        requestMediaPermissions({ audio: true }).then(granted => {
+          if (granted) {
+            originalStart();
+          } else {
+            const errorEvent = new SpeechRecognitionErrorEvent('error');
+            errorEvent.error = 'not-allowed'; // This is the standard error for permission denial.
+            recognizer.dispatchEvent(errorEvent);
+          }
+        });
+      };
+
+      return recognizer;
+    };
+
+    SpeechRecognitionWrapper.prototype = OriginalSpeechRecognition.prototype;
+    SpeechRecognitionWrapper.prototype.constructor = SpeechRecognitionWrapper;
+
+    if (window.SpeechRecognition) {
+      window.SpeechRecognition = SpeechRecognitionWrapper;
+    }
+    if (window.webkitSpeechRecognition) {
+      window.webkitSpeechRecognition = SpeechRecognitionWrapper;
+    }
+  }
+
+  interceptSpeechRecognition();
+
+  window.addEventListener('message', function(event) {
+    if (event.data) {
+      if (event.data.type === 'resolveMediaPermission') {
+        const { promiseId, granted } = event.data;
+        if (pendingMediaResolvers[promiseId]) {
+          pendingMediaResolvers[promiseId](granted);
+        }
+      }
+    }
+  });
+
+})();</script><script ws-interception-config="{&quot;parentOrigin&quot;:&quot;https://gemini.google.com&quot;,&quot;proxiedDomains&quot;:[]}">(function(){'use strict';var u=typeof Object.defineProperties=="function"?Object.defineProperty:function(b,d,e){if(b==Array.prototype||b==Object.prototype)return b;b[d]=e.value;return b};function v(b){b=["object"==typeof globalThis&&globalThis,b,"object"==typeof window&&window,"object"==typeof self&&self,"object"==typeof global&&global];for(var d=0;d<b.length;++d){var e=b[d];if(e&&e.Math==Math)return e}throw Error("Cannot find global object");}var w=v(this);
+function y(b,d){if(d)a:{var e=w;b=b.split(".");for(var h=0;h<b.length-1;h++){var k=b[h];if(!(k in e))break a;e=e[k]}b=b[b.length-1];h=e[b];d=d(h);d!=h&&d!=null&&u(e,b,{configurable:!0,writable:!0,value:d})}}function z(b){function d(h){return b.next(h)}function e(h){return b.throw(h)}return new Promise(function(h,k){function m(n){n.done?h(n.value):Promise.resolve(n.value).then(d,e).then(m,k)}m(b.next())})}y("globalThis",function(b){return b||w});/*
+
+ Copyright The Closure Library Authors.
+ SPDX-License-Identifier: Apache-2.0
+*/
+function A(b,d){function e(){}e.prototype=d.prototype;b.i=d.prototype;b.prototype=new e;b.prototype.constructor=b;b.g=function(h,k,m){for(var n=Array(arguments.length-2),p=2;p<arguments.length;p++)n[p-2]=arguments[p];return d.prototype[k].apply(h,n)}};function B(b,d,e="*"){function h(a){if(typeof a==="string")return F.encode(a).buffer;if(a instanceof ArrayBuffer)return a.slice(0);if(ArrayBuffer.isView(a))return a.buffer.slice(a.byteOffset,a.byteOffset+a.byteLength);throw Error("Invalid data type");}function k(a){a=h(a);var f={type:"send",data:new Uint8Array(a)},g;(g=r)==null||g.postMessage(f,[a])}function m(){if(!r)throw Error("Data port not captured yet.");r.onmessage=a=>{if(a.data.type==="message"){a=new MessageEvent("message",{data:G.decode(a.data.data)});
+let f;(f=c.onmessage)==null||f.call(c,a);c.dispatchEvent(a)}}}function n(){if(!t)throw Error("Control port not captured yet.");t.onmessage=a=>{switch(a.data.type){case "open":l=1;var f=new Event("open"),g;(g=c.onopen)==null||g.call(c,f);c.dispatchEvent(f);q.forEach(H=>{k(H)});q=[];break;case "close":g=a.data;l=3;g=new CloseEvent("close",{code:g.code,reason:g.reason,wasClean:g.wasClean});(f=c.onclose)==null||f.call(c,g);c.dispatchEvent(g);break;case "error":l=3;f=new Event("error");let x;(x=c.onerror)==
+null||x.call(c,f);c.dispatchEvent(f)}}}function p(a){return z(function*(){var f=new MessageChannel;t=f.port1;var g=new MessageChannel;r=g.port1;n();m();window.parent.postMessage({type:"websocket_open",portOrdering:["control","data"],url:b,protocols:a||[],connectionId:I},e,[f.port2,g.port2])}())}var c=Reflect.construct(EventTarget,[],new.target);c.CONNECTING=0;c.OPEN=1;c.CLOSING=2;c.CLOSED=3;c.url=b;c.binaryType="arraybuffer";c.protocol="";c.h="";var l=0,t=null,r=null,q=[],F=new TextEncoder,G=new TextDecoder;
+c.onopen=null;c.onmessage=null;c.onclose=null;c.onerror=null;Object.defineProperty(c,"readyState",{get:()=>l,enumerable:!0,configurable:!0});Object.defineProperty(c,"bufferedAmount",{get:()=>{var a=0;q.forEach(f=>{a+=typeof f==="string"?f.length:f.byteLength});return a},enumerable:!0,configurable:!0});var I=function(){var a;return((a=globalThis.crypto)==null?0:a.randomUUID)?globalThis.crypto.randomUUID():"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,f=>{var g=Math.random()*16|0;return(f===
+"x"?g:g&3|8).toString(16)})}();c.send=a=>{if(l===1)a instanceof Blob?a.arrayBuffer().then(f=>{k(f)}):k(a);else if(l===0)if(typeof a==="string")q.push(a);else if(a instanceof ArrayBuffer||ArrayBuffer.isView(a))q.push(h(a));else throw Error("Sending Blob is not supported before the connection is open.");else console.debug("WebSocket send called in CLOSING or CLOSED state; ignored.")};c.close=(a=1E3,f="")=>{if(l!==2&&l!==3){l=2;a={type:"close",code:a,reason:f,wasClean:a===1E3};var g;(g=t)==null||g.postMessage(a)}};
+Promise.resolve().then(()=>p(d));return c}A(B,EventTarget);var C=document.currentScript,D=C==null?void 0:C.getAttribute("ws-interception-config");if(!D)throw Error("WebSocket Interceptor: Missing ws-interception-config attribute in the script tag.");var E=JSON.parse(D);if(!E.parentOrigin||typeof E.parentOrigin!=="string")throw Error("WebSocket Interceptor: Invalid parentOrigin in ws-interception-config");
+(function(b){var d=Object.getOwnPropertyDescriptor(window,"WebSocket");if(!d||d.writable||d.configurable)d=Object.assign(function(e,h){try{let k=(new URL(e)).hostname;if(b.proxiedDomains.some(m=>k===m||k.endsWith(`.${m}`)))return new B(e,h,b.parentOrigin)}catch(k){throw window.parent.postMessage({type:"websocket_blocked",url:e,reason:"blocked_invalid_url"},b.parentOrigin),new DOMException(`WebSocket connection to '${e}' is not allowed in Canvas.`,"SecurityError");}window.parent.postMessage({type:"websocket_blocked",
+url:e,reason:"blocked_domain_not_allowlisted"},b.parentOrigin);throw new DOMException(`WebSocket connection to '${e}' is not allowed in Canvas.`,"SecurityError");},{CONNECTING:0,OPEN:1,CLOSING:2,CLOSED:3}),Object.defineProperty(window,"WebSocket",{value:d,writable:!1,configurable:!1})})({proxiedDomains:E.proxiedDomains||[],parentOrigin:E.parentOrigin});}).call(this);
+</script><script>((function(modelInformation) {
+  const originalFetch = window.fetch;
+  // TODO: b/421908508 - Move these out of the script and match all generative AI model calls.
+  let googleLlmBaseApiUrls = [
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.textModelName + ':streamGenerateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.textModelName + ':generateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageModelName + ':predict',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageModelName + ':predictLongRunning',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageEditModelName + ':generateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageTransformModelName + ':generateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.videoModelName + ':predict',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.videoModelName + ':predictLongRunning',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.ttsModelName + ':generateContent',
+  ];
+  modelInformation.deprecatedTextModelNames.forEach((modelName) => {
+    googleLlmBaseApiUrls.push(
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':streamGenerateContent',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':generateContent',
+    );
+  });
+  modelInformation.deprecatedImageModelNames.forEach((modelName) => {
+    googleLlmBaseApiUrls.push(
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':predict',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':predictLongRunning',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':generateContent',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':streamGenerateContent',
+    );
+  });
+  modelInformation.deprecatedGenerateImageModelNames.forEach((modelName) => {
+    googleLlmBaseApiUrls.push(
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':generateContent',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':streamGenerateContent',
+    );
+  });
+
+  const pendingFetchResolvers = {};
+  let nextPromiseId = 0;
+
+  function handleStringInput(input, optionsArgument) {
+    const actualUrl = input;
+    const fetchCallArgs = [actualUrl, optionsArgument];
+    const effectiveOptions = optionsArgument || {};
+    const bodyForApiKeyCheck = effectiveOptions.body;
+    const bodyForPostMessage = effectiveOptions.body;
+    return { actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage };
+  }
+
+  function handleRequestInput(input, optionsArgument) {
+    const actualUrl = input.url;
+    const fetchCallArgs = [input, optionsArgument];
+    const effectiveOptions = { method: input.method, headers: new Headers(input.headers) };
+    let bodyForApiKeyCheck;
+    let bodyForPostMessage;
+
+    if (optionsArgument) {
+      if (optionsArgument.method) effectiveOptions.method = optionsArgument.method;
+      if (optionsArgument.headers) effectiveOptions.headers = new Headers(optionsArgument.headers);
+      if ('body' in optionsArgument) {
+        bodyForApiKeyCheck = optionsArgument.body;
+        bodyForPostMessage = optionsArgument.body;
+      } else {
+        bodyForApiKeyCheck = undefined;
+        bodyForPostMessage = input.body;
+      }
+    } else {
+      bodyForApiKeyCheck = undefined;
+      bodyForPostMessage = input.body;
+    }
+    return { actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage };
+  }
+
+  window.fetch = function(input, optionsArgument) {
+    let actualUrl;
+    let fetchCallArgs;
+    let effectiveOptions = {};
+    let bodyForApiKeyCheck;
+    let bodyForPostMessage;
+
+    if (typeof input === 'string') {
+      ({actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage} = handleStringInput(input, optionsArgument));
+    } else if (input instanceof Request) {
+      ({actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage} = handleRequestInput(input, optionsArgument));
+    } else {
+      return originalFetch.apply(window, [input, optionsArgument]);
+    }
+
+    effectiveOptions.method = effectiveOptions.method || 'GET';
+    if (!effectiveOptions.headers) {
+      effectiveOptions.headers = new Headers();
+    }
+
+
+    if (typeof actualUrl === 'string' && googleLlmBaseApiUrls.some((url) => actualUrl.startsWith(url))) {
+      let apiKeyIsNull = true;
+
+      const regex = new RegExp("models/([^:]+)");
+      const modelNameMatch = actualUrl.match(regex);
+      const modelName = modelNameMatch ? modelNameMatch[1] : 'unspecified';
+
+
+      try {
+        const urlObject = new URL(actualUrl);  // Use URL object for robust parsing
+        const apiKeyParam = urlObject.searchParams.get('key');
+        if (apiKeyParam) {
+          apiKeyIsNull = false;
+        }
+      } catch (e) {
+        // Continue checks even if URL parsing fails
+      }
+
+      if (apiKeyIsNull && effectiveOptions.headers) {
+        const h = new Headers(effectiveOptions.headers);
+        const apiKeyHeaderValue = h.get('X-API-Key') || h.get('x-api-key');
+        if (apiKeyHeaderValue) {
+          apiKeyIsNull = false;
+          return originalFetch.apply(window, fetchCallArgs);
+        }
+      }
+
+      if (apiKeyIsNull && effectiveOptions.method && ['POST', 'PUT', 'PATCH'].includes(effectiveOptions.method.toUpperCase()) && typeof bodyForApiKeyCheck === 'string') {
+        try {
+          const bodyData = JSON.parse(bodyForApiKeyCheck);
+          if (bodyData && bodyData.apiKey) {
+            apiKeyIsNull = false;
+            return originalFetch.apply(window, fetchCallArgs);
+          }
+        } catch (e) {
+          // Ignore JSON parsing errors
+        }
+      }
+
+      if(apiKeyIsNull) {
+        const promiseId = nextPromiseId++;
+        const promise = new Promise((resolve) => {
+          pendingFetchResolvers[promiseId] = (resolvedResponse) => {
+            delete pendingFetchResolvers[promiseId];
+            resolve(resolvedResponse);
+          };
+        });
+
+        let serializedBodyForPostMessage;
+        if (typeof bodyForPostMessage === 'string' || bodyForPostMessage == null) {
+            serializedBodyForPostMessage = bodyForPostMessage;
+        } else if (bodyForPostMessage instanceof ReadableStream) {
+            serializedBodyForPostMessage = null;
+        } else {
+            try {
+                serializedBodyForPostMessage = JSON.stringify(bodyForPostMessage);
+            } catch (e) {
+                serializedBodyForPostMessage = null;
+            }
+        }
+
+        const messageOptions = {
+            method: effectiveOptions.method,
+            headers: Object.fromEntries(new Headers(effectiveOptions.headers).entries()),
+            body: serializedBodyForPostMessage
+        };
+
+        window.parent.postMessage({
+          type: 'requestFetch',
+          url: actualUrl,
+          modelName: modelName,
+          options: messageOptions,
+          promiseId: promiseId,
+        }, '*');
+
+        return promise;
+      }
+      return originalFetch.apply(window, fetchCallArgs);
+    }
+    return originalFetch.apply(window, fetchCallArgs);
+  };
+
+  window.addEventListener('message', function(event) {
+    if (event.data && event.data.type === 'resolveFetch') {
+      const { promiseId, response } = event.data;
+      if (pendingFetchResolvers[promiseId]) {
+        try {
+          const reconstructedResponse = new Response(response.body, {
+            status: response.status,
+            statusText: response.statusText,
+            headers: new Headers(response.headers),
+          });
+          pendingFetchResolvers[promiseId](reconstructedResponse);
+        } catch (error) {
+          pendingFetchResolvers[promiseId](new Response(null, { status: 500, statusText: "Interceptor Response Reconstruction Error" }));
+        }
+      }
+    }
+  });
+
+}))({"textModelName":"gemini-3-flash-preview","imageModelName":"imagen-4.0-generate-001","imageEditModelName":"gemini-3.1-flash-image-preview","imageTransformModelName":"gemini-3-pro-image-preview-11-2025","videoModelName":"veo-2.0-generate-001","ttsModelName":"gemini-2.5-flash-preview-tts","deprecatedTextModelNames":["gemini-2.0-flash","gemini-2.5-flash","gemini-2.5-flash-preview-04-17","gemini-2.5-flash-preview-05-20","gemini-2.5-flash-preview-09-2025"],"deprecatedImageModelNames":["imagen-3.0-generate-001","imagen-3.0-generate-002"],"deprecatedGenerateImageModelNames":["gemini-2.5-flash-image-preview","gemini-2.5-flash-image"]})</script><script>(function(){'use strict';function a(){window.parent.postMessage({type:"interaction"},"*")}window.addEventListener("click",a,{capture:!0,passive:!0});window.addEventListener("touchstart",a,{capture:!0,passive:!0});window.addEventListener("keydown",a,{capture:!0,passive:!0});}).call(this);
+</script><script>(function() {
+  const originalConsoleLog = console.log;
+  const originalConsoleError = console.error;
+
+    /**
+   * Normalizes an error event or a promise rejection reason into a structured error object.
+   * @param {*} errorEventOrReason The error object or reason.
+   * @return {object} Structured error data { message, name, stack }.
+   */
+  function getErrorObject(errorEventOrReason) {
+    if (errorEventOrReason instanceof Error) {
+      return {
+        message: errorEventOrReason.message,
+        name: errorEventOrReason.name,
+        stack: errorEventOrReason.stack,
+      };
+    }
+    // Fallback for non-Error objects.
+    try {
+      return {
+        message: JSON.stringify(errorEventOrReason),
+        name: 'UnknownErrorType',
+        stack: null,
+      };
+    } catch (e) {
+      return {
+        message: String(errorEventOrReason),
+        name: 'UnknownErrorTypeNonStringifiable',
+        stack: null,
+      };
+    }
+  }
+
+  /**
+   * Converts an array of arguments (from log/error) into a single string.
+   * Handles Error objects specially to include their message and stack.
+   * @param {Array<*>} args - Arguments passed to console methods.
+   * @return {string} A string representation of the arguments.
+   */
+  function stringifyArgs(args) {
+    return args
+      .map((arg) => {
+        if (arg instanceof Error) {
+          const {message, stack} = arg;
+          return `Error: ${message}${stack ? ('\nStack: ' + stack) : ''}`;
+        }
+        if (typeof arg === 'object' && arg !== null) {
+          try {
+            return JSON.stringify(arg);
+          } catch (error) {
+            return '[Circular Object]';
+          }
+        } else {
+          return String(arg);
+        }
+      })
+      .join(' ');
+  }
+
+  console.log = function(...args) {
+    const logString = stringifyArgs(args);
+    window.parent.postMessage({ type: 'log', message: logString }, '*');
+    originalConsoleLog.apply(console, args);
+  };
+
+  console.error = function(...args) {
+    let errorData;
+    if (args.length > 0 && args[0] instanceof Error) {
+      const err = args[0];
+      // If the first arg is an Error, capture its details.
+      errorData = {
+        type: 'error',
+        source: 'CONSOLE_ERROR',
+        ...getErrorObject(err),
+        rawArgsString: stringifyArgs(args.slice(1)),
+        timestamp: new Date().toISOString(),
+      };
+    } else {
+      // If not an Error object, treat all args as a general error message.
+      errorData = {
+        type: 'error',
+        source: 'CONSOLE_ERROR',
+        message: stringifyArgs(args),
+        name: 'ConsoleLoggedError',
+        stack: null,
+        timestamp: new Date().toISOString(),
+      };
+    }
+    window.parent.postMessage(errorData, '*');
+    originalConsoleError.apply(console, args);
+  };
+
+  // Listen for global unhandled synchronous errors.
+  window.addEventListener('error', function(event) {
+    const errorDetails = event.error ? getErrorObject(event.error) : {
+      message: event.message,
+      name: 'GlobalError',
+      stack: null,
+      filename: event.filename,
+      lineno: event.lineno,
+      colno: event.colno,
+    };
+
+    window.parent.postMessage({
+      type: 'error',
+      source: 'global',
+      ...errorDetails,
+      message: errorDetails.message || event.message,
+      timestamp: new Date().toISOString(),
+    }, '*');
+  });
+
+  // Listen for unhandled promise rejections (asynchronous errors).
+  window.addEventListener('unhandledrejection', function(event) {
+    const errorDetails = getErrorObject(event.reason);
+
+    window.parent.postMessage({
+      type: 'error',
+      source: 'unhandledrejection',
+      ...errorDetails,
+      message: errorDetails.message || 'Unhandled Promise Rejection',
+      timestamp: new Date().toISOString(),
+    }, '*');
+  });
+
+})();</script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>星際貪食蛇</title>
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #0f172a; /* Tailwind slate-900 */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            touch-action: none; /* Prevent pull-to-refresh on mobile */
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        #ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .panel {
+            pointer-events: auto;
+        }
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+    </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.absolute{position:absolute}.inset-0{inset:0px}.right-10{right:2.5rem}.top-10{top:2.5rem}.z-10{z-index:10}.z-20{z-index:20}.z-30{z-index:30}.mb-1{margin-bottom:0.25rem}.mb-2{margin-bottom:0.5rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.flex{display:flex}.hidden{display:none}.w-full{width:100%}.max-w-lg{max-width:32rem}.max-w-md{max-width:28rem}.transform{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}.flex-col{flex-direction:column}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:0.25rem}.rounded-full{border-radius:9999px}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-purple-500\/50{border-color:rgb(168 85 247 / 0.5)}.bg-slate-800\/80{background-color:rgb(30 41 59 / 0.8)}.bg-slate-900\/80{background-color:rgb(15 23 42 / 0.8)}.bg-gradient-to-b{background-image:linear-gradient(to bottom, var(--tw-gradient-stops))}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.from-blue-600{--tw-gradient-from:#2563eb var(--tw-gradient-from-position);--tw-gradient-to:rgb(37 99 235 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-green-400{--tw-gradient-from:#4ade80 var(--tw-gradient-from-position);--tw-gradient-to:rgb(74 222 128 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-purple-600{--tw-gradient-from:#9333ea var(--tw-gradient-from-position);--tw-gradient-to:rgb(147 51 234 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-red-400{--tw-gradient-from:#f87171 var(--tw-gradient-from-position);--tw-gradient-to:rgb(248 113 113 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.to-blue-500{--tw-gradient-to:#3b82f6 var(--tw-gradient-to-position)}.to-pink-500{--tw-gradient-to:#ec4899 var(--tw-gradient-to-position)}.to-red-600{--tw-gradient-to:#dc2626 var(--tw-gradient-to-position)}.bg-clip-text{-webkit-background-clip:text;background-clip:text}.p-4{padding:1rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-8{padding-left:2rem;padding-right:2rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-4{padding-top:1rem;padding-bottom:1rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.text-2xl{font-size:1.5rem;line-height:2rem}.text-5xl{font-size:3rem;line-height:1}.text-7xl{font-size:4.5rem;line-height:1}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.font-black{font-weight:900}.font-bold{font-weight:700}.text-blue-400{--tw-text-opacity:1;color:rgb(96 165 250 / var(--tw-text-opacity, 1))}.text-green-400{--tw-text-opacity:1;color:rgb(74 222 128 / var(--tw-text-opacity, 1))}.text-pink-400{--tw-text-opacity:1;color:rgb(244 114 182 / var(--tw-text-opacity, 1))}.text-purple-400{--tw-text-opacity:1;color:rgb(192 132 252 / var(--tw-text-opacity, 1))}.text-red-400{--tw-text-opacity:1;color:rgb(248 113 113 / var(--tw-text-opacity, 1))}.text-slate-200{--tw-text-opacity:1;color:rgb(226 232 240 / var(--tw-text-opacity, 1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225 / var(--tw-text-opacity, 1))}.text-transparent{color:transparent}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-yellow-400{--tw-text-opacity:1;color:rgb(250 204 21 / var(--tw-text-opacity, 1))}.shadow-\[0_0_15px_rgba\(168\2c 85\2c 247\2c 0\.4\)\]{--tw-shadow:0 0 15px rgba(168,85,247,0.4);--tw-shadow-colored:0 0 15px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.drop-shadow-\[0_0_15px_rgba\(239\2c 68\2c 68\2c 0\.8\)\]{--tw-drop-shadow:drop-shadow(0 0 15px rgba(239,68,68,0.8));filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.drop-shadow-md{--tw-drop-shadow:drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.hover\:scale-105:hover{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:from-blue-500:hover{--tw-gradient-from:#3b82f6 var(--tw-gradient-from-position);--tw-gradient-to:rgb(59 130 246 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.hover\:from-purple-500:hover{--tw-gradient-from:#a855f7 var(--tw-gradient-from-position);--tw-gradient-to:rgb(168 85 247 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.hover\:to-blue-400:hover{--tw-gradient-to:#60a5fa var(--tw-gradient-to-position)}.hover\:to-pink-400:hover{--tw-gradient-to:#f472b6 var(--tw-gradient-to-position)}.active\:scale-95:active{--tw-scale-x:.95;--tw-scale-y:.95;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@media (min-width: 768px){.md\:text-7xl{font-size:4.5rem;line-height:1}.md\:text-8xl{font-size:6rem;line-height:1}.md\:text-xl{font-size:1.25rem;line-height:1.75rem}}</style></head>
+<body>
+
+    <canvas id="gameCanvas" width="525" height="448"></canvas>
+
+    <!-- UI Layer -->
+    <div id="ui-layer" class="flex flex-col justify-between p-4 text-white z-10">
+        <!-- HUD -->
+        <div id="hud" class="hidden flex justify-between items-start text-xl font-bold text-shadow">
+            <div>
+                <div class="text-pink-400 flex items-center gap-1 mb-1">
+                    生命: <span id="livesDisplay" class="flex gap-1 text-2xl drop-shadow-md"></span>
+                </div>
+                <div class="text-purple-400 flex items-center gap-1 mb-1">
+                    大絕招(按S): <span id="ultDisplay" class="flex gap-1 text-2xl drop-shadow-md"></span>
+                </div>
+                <div class="text-blue-400">關卡: <span id="levelDisplay">1</span></div>
+                <div class="text-green-400">時間: <span id="timeDisplay">03:00</span></div>
+                <div class="text-yellow-400">分數: <span id="scoreDisplay">0</span></div>
+            </div>
+            <div class="text-red-400 text-right">
+                蛇的長度: <span id="snakeLengthDisplay">0</span>
+            </div>
+        </div>
+
+        <!-- 倒數 15 秒大字提示 -->
+        <div id="urgentCountdown" class="hidden absolute top-10 right-10 text-7xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-red-400 to-red-600 animate-pulse drop-shadow-[0_0_15px_rgba(239,68,68,0.8)] z-20">
+            15
+        </div>
+
+        <!-- Start / Game Over Screen -->
+        <div id="menuPanel" class="panel absolute inset-0 flex flex-col items-center justify-center bg-slate-900/80 backdrop-blur-sm z-30">
+            <h1 id="menuTitle" class="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 mb-4 text-center">
+                星際貪食蛇
+            </h1>
+            <p id="menuSubtitle" class="text-lg md:text-xl text-slate-300 mb-8 max-w-md text-center px-4">
+                滑鼠/觸控移動戰機，自動射擊。<br>
+                <span class="text-purple-400 font-bold">遇到危險時可按 S 鍵施放長度減半大絕！</span><br>
+                <span class="text-pink-400 font-bold">打掉蛋糕阻止牠吃掉變長！</span><br>
+                將蛇消滅即可進入下一關。
+            </p>
+            <div id="finalScore" class="hidden text-2xl text-yellow-400 font-bold mb-6">最終分數: 0</div>
+            
+            <!-- Gemini AI Area -->
+            <div id="aiArea" class="flex flex-col items-center w-full max-w-lg mb-6">
+                <button id="aiBtn" class="px-6 py-2 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white font-bold rounded-full shadow-lg transform transition hover:scale-105 active:scale-95 text-lg mb-2">
+                    ✨ 聆聽蜜蜂女王的指引 ✨
+                </button>
+                <div id="aiText" class="text-md text-slate-200 text-left bg-slate-800/80 p-4 rounded-xl border border-purple-500/50 hidden w-full shadow-[0_0_15px_rgba(168,85,247,0.4)]"></div>
+            </div>
+
+            <button id="startBtn" class="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold rounded-full shadow-lg transform transition hover:scale-105 active:scale-95 text-xl">
+                開始遊戲
+            </button>
+        </div>
+    </div>
+
+<script>
+/**
+ * 遊戲主要邏輯
+ */
+
+// --- Gemini API Setup ---
+const apiKey = ""; // 執行環境會在 Runtime 自動提供，這裡留空即可
+
+async function fetchGeminiWithRetry(prompt, retries = 5) {
+    const delays = [1000, 2000, 4000, 8000, 16000];
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+    const payload = {
+        contents: [{ parts: [{ text: prompt }] }]
+    };
+
+    for (let i = 0; i < retries; i++) {
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const data = await response.json();
+            return data.candidates?.[0]?.content?.parts?.[0]?.text || "無法生成內容。";
+        } catch (error) {
+            if (i === retries - 1) return "通訊中斷，無法取得 AI 訊號。請稍後再試。";
+            await new Promise(resolve => setTimeout(resolve, delays[i]));
+        }
+    }
+}
+
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+
+// UI Elements
+const menuPanel = document.getElementById('menuPanel');
+const startBtn = document.getElementById('startBtn');
+const menuTitle = document.getElementById('menuTitle');
+const menuSubtitle = document.getElementById('menuSubtitle');
+const finalScoreEl = document.getElementById('finalScore');
+const hud = document.getElementById('hud');
+const levelDisplay = document.getElementById('levelDisplay');
+const timeDisplay = document.getElementById('timeDisplay');
+const scoreDisplay = document.getElementById('scoreDisplay');
+const snakeLengthDisplay = document.getElementById('snakeLengthDisplay');
+const livesDisplay = document.getElementById('livesDisplay');
+const ultDisplay = document.getElementById('ultDisplay');
+const urgentCountdown = document.getElementById('urgentCountdown');
+const aiBtn = document.getElementById('aiBtn');
+const aiText = document.getElementById('aiText');
+
+// Game State
+let GAME_STATE = 'MENU'; // MENU, PLAYING, TIME_UP_ANIM, GAMEOVER
+let animationId;
+let lastTime = 0;
+
+// Game Variables
+let level = 1;
+let score = 0;
+let lives = 5;
+let ultimates = 2; // 大絕招次數
+let baseSpeedMultiplier = 1;
+let levelTimeLeft = 180; // 3分鐘 = 180秒
+let nextHoneySpawnTime = 150; // 第一次蜂蜜在倒數至150秒(經過30秒)時掉落
+
+// Entities Arrays
+let bullets = [];
+let cakes = [];
+let honeyJars = [];
+let particles = [];
+let stars = [];
+
+// Screen handling
+let width, height;
+function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+    initStars();
+}
+window.addEventListener('resize', resize);
+
+// Input handling (Mouse & Touch)
+const input = { x: 0, y: 0, isDown: false };
+function updateInputPos(e) {
+    if (GAME_STATE !== 'PLAYING') return;
+    let clientX = e.clientX;
+    let clientY = e.clientY;
+    if (e.touches && e.touches.length > 0) {
+        clientX = e.touches[0].clientX;
+        clientY = e.touches[0].clientY;
+    }
+    input.x = clientX;
+    input.y = clientY;
+}
+window.addEventListener('mousemove', updateInputPos);
+window.addEventListener('touchmove', (e) => { updateInputPos(e); e.preventDefault(); }, {passive: false});
+window.addEventListener('mousedown', () => input.isDown = true);
+window.addEventListener('mouseup', () => input.isDown = false);
+window.addEventListener('touchstart', (e) => { input.isDown = true; updateInputPos(e); });
+window.addEventListener('touchend', () => input.isDown = false);
+
+// Keyboard handling (大絕招)
+window.addEventListener('keydown', (e) => {
+    if ((e.key === 's' || e.key === 'S') && GAME_STATE === 'PLAYING') {
+        useUltimate();
+    }
+});
+
+// --- Classes ---
+
+class Star {
+    constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speed = (Math.random() * 0.5 + 0.2);
+        this.color = `rgba(255, 255, 255, ${Math.random() * 0.5 + 0.3})`;
+    }
+    update(dt) {
+        this.y += this.speed * (dt / 16) * (1 + baseSpeedMultiplier * 0.5);
+        if (this.y > height) {
+            this.y = 0;
+            this.x = Math.random() * width;
+        }
+    }
+    draw(ctx) {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+class Player {
+    constructor() {
+        this.width = 40;
+        this.height = 40;
+        this.x = width / 2;
+        this.y = height - this.height - 20;
+        this.color = '#fde047'; // 黃色小蜜蜂身體
+        this.lastShot = 0;
+        this.fireRate = 150; // ms between shots
+        this.invulnerable = 0; // 無敵時間計時器 (ms)
+    }
+    update(dt, time) {
+        if (this.invulnerable > 0) {
+            this.invulnerable -= dt;
+        }
+
+        // 全方位平滑跟隨滑鼠/觸控點
+        const targetX = input.x || width / 2;
+        const targetY = input.y || height - this.height - 20;
+        
+        this.x += (targetX - this.x) * 0.2;
+        this.y += (targetY - this.y) * 0.2;
+
+        // 確保不會飛出畫面
+        if (this.x < this.width/2) this.x = this.width/2;
+        if (this.x > width - this.width/2) this.x = width - this.width/2;
+        if (this.y < this.height/2) this.y = this.height/2;
+        if (this.y > height - this.height/2) this.y = height - this.height/2;
+
+        // 自動射擊
+        if (time - this.lastShot > this.fireRate) {
+            this.shoot();
+            this.lastShot = time;
+        }
+    }
+    shoot() {
+        bullets.push(new Bullet(this.x, this.y - this.height/2));
+    }
+    draw(ctx) {
+        // 無敵時間內的閃爍效果
+        if (this.invulnerable > 0 && Math.floor(performance.now() / 100) % 2 === 0) {
+            return;
+        }
+
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        
+        // 蜜蜂翅膀 (左、右)
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.7)'; // 半透明白
+        ctx.beginPath();
+        ctx.ellipse(-15, -5, 12, 6, Math.PI / 4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(15, -5, 12, 6, -Math.PI / 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 蜜蜂毒刺 (尾部)
+        ctx.fillStyle = '#000000';
+        ctx.beginPath();
+        ctx.moveTo(-4, 15);
+        ctx.lineTo(4, 15);
+        ctx.lineTo(0, 25);
+        ctx.fill();
+
+        // 蜜蜂身體 (黃色橢圓)
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, 14, 20, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 黑條紋
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(-13, 0); ctx.lineTo(13, 0);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(-11, 8); ctx.lineTo(11, 8);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(-11, -8); ctx.lineTo(11, -8);
+        ctx.stroke();
+
+        // 觸角
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(-4, -18); ctx.lineTo(-8, -25);
+        ctx.moveTo(4, -18); ctx.lineTo(8, -25);
+        ctx.stroke();
+        ctx.fillStyle = '#000000';
+        ctx.beginPath();
+        ctx.arc(-8, -25, 2, 0, Math.PI * 2);
+        ctx.arc(8, -25, 2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 眼睛
+        ctx.beginPath();
+        ctx.arc(-5, -12, 2.5, 0, Math.PI * 2);
+        ctx.arc(5, -12, 2.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+    }
+}
+
+class Bullet {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.radius = 4;
+        this.speed = 12;
+        this.color = '#fef08a'; // yellow-200
+        this.markedForDeletion = false;
+    }
+    update(dt) {
+        this.y -= this.speed * (dt / 16);
+        if (this.y < -50) this.markedForDeletion = true;
+    }
+    draw(ctx) {
+        ctx.fillStyle = this.color;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0; // reset
+    }
+}
+
+class Cake {
+    constructor(speedMultiplier = 1) {
+        this.radius = 15;
+        this.speed = (2 + Math.random() * 2) * baseSpeedMultiplier * speedMultiplier;
+        this.markedForDeletion = false;
+        
+        // 隨機決定從哪個邊緣生成 (0:上, 1:右, 2:下, 3:左)
+        let edge = Math.floor(Math.random() * 4);
+        
+        if (edge === 0) { // 上方
+            this.x = Math.random() * width;
+            this.y = -30;
+            this.vx = (Math.random() - 0.5) * this.speed;
+            this.vy = this.speed;
+        } else if (edge === 1) { // 右方
+            this.x = width + 30;
+            this.y = Math.random() * height;
+            this.vx = -this.speed;
+            this.vy = (Math.random() - 0.5) * this.speed;
+        } else if (edge === 2) { // 下方
+            this.x = Math.random() * width;
+            this.y = height + 30;
+            this.vx = (Math.random() - 0.5) * this.speed;
+            this.vy = -this.speed;
+        } else { // 左方
+            this.x = -30;
+            this.y = Math.random() * height;
+            this.vx = this.speed;
+            this.vy = (Math.random() - 0.5) * this.speed;
+        }
+    }
+    update(dt) {
+        this.x += this.vx * (dt / 16);
+        this.y += this.vy * (dt / 16);
+        
+        // 飛出畫面太遠則刪除
+        if (this.x < -100 || this.x > width + 100 || this.y < -100 || this.y > height + 100) {
+            this.markedForDeletion = true;
+        }
+    }
+    draw(ctx) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        
+        // Plate/Base
+        ctx.fillStyle = '#fbcfe8'; // pink-200
+        ctx.fillRect(-12, 0, 24, 10);
+        
+        // Icing
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(-6, 0, 6, 0, Math.PI * 2);
+        ctx.arc(6, 0, 6, 0, Math.PI * 2);
+        ctx.arc(0, -4, 6, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Cherry
+        ctx.fillStyle = '#ef4444'; // red-500
+        ctx.beginPath();
+        ctx.arc(0, -8, 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+    }
+}
+
+class HoneyJar {
+    constructor() {
+        this.radius = 16;
+        this.x = this.radius + Math.random() * (width - this.radius * 2);
+        this.y = -30;
+        this.speed = 3 * baseSpeedMultiplier;
+        this.markedForDeletion = false;
+    }
+    update(dt) {
+        this.y += this.speed * (dt / 16);
+        if (this.y > height + 50) this.markedForDeletion = true;
+    }
+    draw(ctx) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        
+        // 罐身 (橘黃色)
+        ctx.fillStyle = '#f59e0b'; // amber-500
+        ctx.beginPath();
+        ctx.arc(0, 0, this.radius, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // 蓋子/封口
+        ctx.fillStyle = '#fef3c7'; // amber-100
+        ctx.fillRect(-12, -18, 24, 6);
+        
+        // 標籤 (蜂蜜)
+        ctx.fillStyle = '#fffbeb';
+        ctx.fillRect(-10, -5, 20, 10);
+        ctx.fillStyle = '#d97706';
+        ctx.font = 'bold 10px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('蜜', 0, 0);
+
+        ctx.restore();
+    }
+}
+
+class Snake {
+    constructor(startSegments, speedMult) {
+        this.head = {
+            x: width / 2,
+            y: -100,
+            angle: Math.PI / 2, // Pointing down
+            radius: 20
+        };
+        this.baseSpeed = 3 * speedMult;
+        this.baseTurnSpeed = 0.04 * speedMult;
+        this.speed = this.baseSpeed;
+        this.turnSpeed = this.baseTurnSpeed;
+        this.segmentsCount = startSegments;
+        this.segmentRadius = 15;
+        this.history = []; // Stores previous positions for body to follow
+        this.historySpacing = 8; // Frames between segments
+        
+        // Initial history to prevent drawing glitches at start
+        for(let i=0; i < this.segmentsCount * this.historySpacing; i++){
+            this.history.push({x: this.head.x, y: this.head.y - i*2});
+        }
+    }
+
+    update(dt, cakesArr, playerPos, dynamicMultiplier = 1) {
+        if (this.segmentsCount <= 0) return;
+
+        // 套用狂暴階段的動態加速
+        this.speed = this.baseSpeed * dynamicMultiplier;
+        this.turnSpeed = this.baseTurnSpeed * dynamicMultiplier;
+
+        // 1. Determine Target (追蹤離蛇最近的蛋糕，或是玩家)
+        let target = playerPos;
+        let minDis = Infinity;
+        
+        // 尋找全場最靠近頭部的蛋糕
+        cakesArr.forEach(cake => {
+            let d = Math.hypot(cake.x - this.head.x, cake.y - this.head.y);
+            if (d < minDis) {
+                target = cake;
+                minDis = d;
+            }
+        });
+
+        // 2. Steer towards target
+        let dx = target.x - this.head.x;
+        let dy = target.y - this.head.y;
+        let targetAngle = Math.atan2(dy, dx);
+        
+        // Normalize angle difference
+        let deltaAngle = targetAngle - this.head.angle;
+        while (deltaAngle > Math.PI) deltaAngle -= Math.PI * 2;
+        while (deltaAngle < -Math.PI) deltaAngle += Math.PI * 2;
+
+        this.head.angle += deltaAngle * this.turnSpeed * (dt/16);
+
+        // 3. Move Head
+        let moveStep = this.speed * (dt/16);
+        this.head.x += Math.cos(this.head.angle) * moveStep;
+        this.head.y += Math.sin(this.head.angle) * moveStep;
+
+        // 4. Wall Bounce (Keep in bounds mostly)
+        if (this.head.x < this.head.radius) {
+            this.head.x = this.head.radius;
+            this.head.angle = Math.PI - this.head.angle;
+        } else if (this.head.x > width - this.head.radius) {
+            this.head.x = width - this.head.radius;
+            this.head.angle = Math.PI - this.head.angle;
+        }
+        if (this.head.y < -150) { // Allowed to go slightly above
+            this.head.y = -150;
+            this.head.angle = -this.head.angle;
+        }
+
+        // 5. Update History
+        this.history.unshift({x: this.head.x, y: this.head.y});
+        
+        // Trim history
+        let maxHistoryNeeded = this.segmentsCount * this.historySpacing;
+        if (this.history.length > maxHistoryNeeded) {
+            this.history.length = maxHistoryNeeded;
+        }
+    }
+
+    draw(ctx) {
+        if (this.segmentsCount <= 0) return;
+
+        let isRainbow = levelTimeLeft < 120; // 經過60秒(剩餘低於120秒)開啟彩虹模式
+        let timeNow = performance.now();
+
+        // Draw Body Segments (from tail to head)
+        for (let i = this.segmentsCount - 1; i >= 0; i--) {
+            let histIdx = i * this.historySpacing;
+            if (histIdx >= this.history.length) histIdx = this.history.length - 1;
+            let pos = this.history[histIdx];
+            if (!pos) continue;
+
+            if (isRainbow) {
+                // 柔和流動的彩虹顏色
+                ctx.fillStyle = `hsl(${(timeNow/10 + i*15) % 360}, 80%, 70%)`;
+            } else {
+                // Make colors alternate slightly
+                ctx.fillStyle = i % 2 === 0 ? '#22c55e' : '#16a34a'; // green-500 / green-600
+            }
+            
+            ctx.beginPath();
+            ctx.arc(pos.x, pos.y, this.segmentRadius, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Highlight (依比例縮放)
+            ctx.fillStyle = 'rgba(255,255,255,0.2)';
+            ctx.beginPath();
+            let sBody = this.segmentRadius / 15; // 取得目前與原版大小(15)的比例
+            ctx.arc(pos.x - 4*sBody, pos.y - 4*sBody, this.segmentRadius/2, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // Draw Head
+        ctx.save();
+        ctx.translate(this.head.x, this.head.y);
+        ctx.rotate(this.head.angle);
+
+        // Head base
+        if (isRainbow) {
+            ctx.fillStyle = `hsl(${(timeNow/10) % 360}, 80%, 60%)`;
+        } else {
+            ctx.fillStyle = '#ef4444'; // red-500
+        }
+        ctx.beginPath();
+        ctx.arc(0, 0, this.head.radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        let sHead = this.head.radius / 20; // 取得目前頭部與原版大小(20)的比例
+
+        // Eyes (依比例縮放距離與大小)
+        ctx.fillStyle = '#fef08a'; // yellow-200
+        ctx.beginPath();
+        ctx.arc(8*sHead, -8*sHead, 5*sHead, 0, Math.PI*2); // Right eye
+        ctx.arc(8*sHead, 8*sHead, 5*sHead, 0, Math.PI*2);  // Left eye
+        ctx.fill();
+
+        // Pupils
+        ctx.fillStyle = '#000';
+        ctx.beginPath();
+        ctx.arc(10*sHead, -8*sHead, 2*sHead, 0, Math.PI*2);
+        ctx.arc(10*sHead, 8*sHead, 2*sHead, 0, Math.PI*2);
+        ctx.fill();
+
+        ctx.restore();
+    }
+}
+
+class Particle {
+    constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.size = Math.random() * 4 + 2;
+        let angle = Math.random() * Math.PI * 2;
+        let speed = Math.random() * 4 + 1;
+        this.vx = Math.cos(angle) * speed;
+        this.vy = Math.sin(angle) * speed;
+        this.life = 1.0;
+        this.decay = Math.random() * 0.05 + 0.02;
+    }
+    update(dt) {
+        this.x += this.vx * (dt/16);
+        this.y += this.vy * (dt/16);
+        this.life -= this.decay * (dt/16);
+    }
+    draw(ctx) {
+        ctx.globalAlpha = Math.max(0, this.life);
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1.0;
+    }
+}
+
+// --- Game Logic ---
+
+let player;
+let snake;
+let nextCakeTime = 0;
+
+function initStars() {
+    stars = [];
+    for(let i=0; i<100; i++) stars.push(new Star());
+}
+
+function spawnParticles(x, y, color, count=10) {
+    for(let i=0; i<count; i++) {
+        particles.push(new Particle(x, y, color));
+    }
+}
+
+function updateLivesUI() {
+    livesDisplay.innerHTML = '';
+    for(let i=0; i<lives; i++) {
+        livesDisplay.innerHTML += '<span>🐝</span>';
+    }
+}
+
+function updateUltUI() {
+    ultDisplay.innerHTML = '';
+    for(let i=0; i<ultimates; i++) {
+        ultDisplay.innerHTML += '<span>⚡</span>';
+    }
+}
+
+function formatTime(seconds) {
+    let m = Math.floor(seconds / 60);
+    let s = Math.floor(seconds % 60);
+    return '0' + m + ':' + (s < 10 ? '0' : '') + s;
+}
+
+function useUltimate() {
+    if (ultimates > 0 && snake && snake.segmentsCount > 0) {
+        ultimates--;
+        updateUltUI();
+        
+        let cutCount = Math.ceil(snake.segmentsCount / 2);
+        snake.segmentsCount -= cutCount;
+        snakeLengthDisplay.innerText = snake.segmentsCount;
+        
+        // 大絕招全畫面特效 (以蛇頭為中心爆發紫色衝擊波)
+        spawnParticles(snake.head.x, snake.head.y, '#c084fc', 60);
+        
+        // 被砍掉的身體也化作粒子
+        for (let i = 0; i < cutCount; i++) {
+            let histIdx = (snake.segmentsCount + i) * snake.historySpacing;
+            if (histIdx < snake.history.length) {
+                let pos = snake.history[histIdx];
+                spawnParticles(pos.x, pos.y, '#d8b4fe', 8);
+            }
+        }
+        
+        // 分數獎勵
+        score += cutCount * 20;
+        scoreDisplay.innerText = score;
+
+        if (snake.segmentsCount <= 0) {
+            levelUp();
+        }
+    }
+}
+
+function initGame() {
+    resize();
+    input.x = width / 2;
+    input.y = height - 60; // 讓小蜜蜂一開始的目標位置在下方
+    level = 1;
+    score = 0;
+    lives = 5;
+    ultimates = 2;
+    baseSpeedMultiplier = 1;
+    levelTimeLeft = 180;
+    nextHoneySpawnTime = 150;
+    bullets = [];
+    cakes = [];
+    honeyJars = [];
+    particles = [];
+    player = new Player();
+    spawnSnake();
+    
+    updateLivesUI();
+    updateUltUI();
+    levelDisplay.innerText = level;
+    timeDisplay.innerText = formatTime(levelTimeLeft);
+    scoreDisplay.innerText = score;
+    snakeLengthDisplay.innerText = snake.segmentsCount;
+    urgentCountdown.classList.add('hidden');
+    
+    // Reset AI Area for next time
+    aiBtn.classList.remove('hidden');
+    aiBtn.disabled = false;
+    aiBtn.innerText = "✨ 聆聽蜜蜂女王的指引 ✨";
+    aiText.classList.add('hidden');
+    aiText.innerText = "";
+    
+    hud.classList.remove('hidden');
+    menuPanel.classList.add('hidden');
+    
+    GAME_STATE = 'PLAYING';
+    lastTime = performance.now();
+    requestAnimationFrame(gameLoop);
+}
+
+function spawnSnake() {
+    let startLength = 10 + (level - 1) * 3;
+    snake = new Snake(startLength, baseSpeedMultiplier);
+    snakeLengthDisplay.innerText = snake.segmentsCount;
+}
+
+function levelUp() {
+    level++;
+    baseSpeedMultiplier *= 1.15; // 增加 15% 速度
+    score += 1000;
+    levelTimeLeft = 180; // 重置時間
+    nextHoneySpawnTime = 150; // 重置蜂蜜罐掉落時間
+    lives = 5; // 每關重置5條命
+    ultimates = 2; // 每關重置2次大絕
+    honeyJars = []; // 清空畫面上的蜂蜜
+    player.fireRate = 150; // 重置小蜜蜂射擊速度
+    
+    updateLivesUI();
+    updateUltUI();
+    levelDisplay.innerText = level;
+    timeDisplay.innerText = formatTime(levelTimeLeft);
+    scoreDisplay.innerText = score;
+    urgentCountdown.classList.add('hidden');
+    
+    // Spawn explosion where it died
+    spawnParticles(snake.head.x, snake.head.y, '#ef4444', 50);
+    
+    // Brief pause before next snake
+    setTimeout(() => {
+        if(GAME_STATE === 'PLAYING') spawnSnake();
+    }, 1500);
+}
+
+function gameOver(reason = "你被貪食蛇撞毀了！") {
+    GAME_STATE = 'GAMEOVER';
+    hud.classList.add('hidden');
+    urgentCountdown.classList.add('hidden');
+    menuPanel.classList.remove('hidden');
+    menuTitle.innerText = "遊戲結束";
+    menuTitle.className = "text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500 mb-4 text-center";
+    menuSubtitle.innerHTML = reason;
+    window.lastDeathReason = reason; // Save the reason for AI Prompt
+    finalScoreEl.classList.remove('hidden');
+    finalScoreEl.innerText = `最終分數: ${score}`;
+    
+    // Setup AI Report Button
+    aiBtn.classList.remove('hidden');
+    aiBtn.disabled = false;
+    aiBtn.innerText = "✨ 請求 AI 專屬戰報 ✨";
+    aiText.classList.add('hidden');
+    
+    startBtn.innerText = "再玩一次";
+}
+
+function update(time, dt) {
+    // 處理時間終止時的爆炸動畫狀態 (不處理物理與扣血)
+    if (GAME_STATE === 'TIME_UP_ANIM') {
+        stars.forEach(s => s.update(dt));
+        particles.forEach(p => p.update(dt));
+        particles = particles.filter(p => p.life > 0);
+        return; // 終止這回合的物理更新
+    }
+
+    // 時間倒數邏輯
+    levelTimeLeft -= dt / 1000;
+    
+    // 倒數15秒的大字提示
+    if (levelTimeLeft <= 15 && levelTimeLeft > 0) {
+        urgentCountdown.classList.remove('hidden');
+        urgentCountdown.innerText = Math.ceil(levelTimeLeft);
+    } else {
+        urgentCountdown.classList.add('hidden');
+    }
+
+    // 時間到的爆炸機制
+    if (levelTimeLeft <= 0) {
+        levelTimeLeft = 0;
+        timeDisplay.innerText = "00:00";
+        urgentCountdown.classList.add('hidden');
+
+        // 貪食蛇爆走四散 (彩色極速散開)
+        if (snake && snake.segmentsCount > 0) {
+            // 頭部爆炸
+            spawnParticles(snake.head.x, snake.head.y, '#ef4444', 40); 
+            // 身體每節化為快速四散的彩色珠子
+            for (let i = 0; i < snake.segmentsCount; i++) {
+                let histIdx = i * snake.historySpacing;
+                if (histIdx < snake.history.length) {
+                    let pos = snake.history[histIdx];
+                    for (let j=0; j<6; j++) {
+                        let randomColor = `hsl(${Math.random() * 360}, 80%, 60%)`;
+                        let p = new Particle(pos.x, pos.y, randomColor);
+                        p.size = snake.segmentRadius * (Math.random() * 0.5 + 0.3); // 珠體大小
+                        p.vx *= 4; // 極快射出
+                        p.vy *= 4;
+                        p.life = 2.0; // 停留時間長一點
+                        p.decay = Math.random() * 0.01 + 0.005; // 消失得慢一點
+                        particles.push(p);
+                    }
+                }
+            }
+            snake.segmentsCount = 0; // 清除蛇
+        }
+
+        // 進入時間到動畫狀態，過 2.5 秒後才顯示 GAME OVER
+        GAME_STATE = 'TIME_UP_ANIM';
+        setTimeout(() => {
+            gameOver("時間到！貪食蛇爆走四散了！");
+        }, 2500);
+        return;
+    }
+    
+    timeDisplay.innerText = formatTime(levelTimeLeft);
+
+    // 階段性難度增加 (經過 30 秒 = 剩餘 150 秒以下)
+    let currentDynamicMultiplier = 1;
+    let currentCakeSpawnDelay = Math.max(800, 2000 - level * 150);
+
+    if (levelTimeLeft < 150) {
+        // 每少一秒，貪食蛇與蛋糕速度倍率漸漸增加
+        currentDynamicMultiplier += (150 - levelTimeLeft) * 0.01; 
+        // 蛋糕掉落頻率變快 (延遲時間依時間等比縮短)
+        currentCakeSpawnDelay *= (levelTimeLeft / 150) * 0.5 + 0.5;
+    }
+
+    // 貪食蛇每 30 秒變大 (180秒開始，經過每30秒增加0.5倍)
+    if (snake) {
+        let timeElapsed = 180 - levelTimeLeft;
+        let currentSizeMultiplier = 1 + Math.floor(timeElapsed / 30) * 0.5; // 例如: 0秒=1倍, 30秒=1.5倍, 60秒=2倍...
+        snake.head.radius = 20 * currentSizeMultiplier;
+        snake.segmentRadius = 15 * currentSizeMultiplier;
+    }
+
+    // 蜂蜜罐掉落邏輯 (每30秒)
+    if (levelTimeLeft <= nextHoneySpawnTime) {
+        honeyJars.push(new HoneyJar());
+        nextHoneySpawnTime -= 30; // 下一次掉落的時間點
+    }
+
+    // Background stars
+    stars.forEach(s => s.update(dt));
+
+    // Player
+    player.update(dt, time);
+
+    // Cake Spawning
+    if (time > nextCakeTime) {
+        // 給新生成的蛋糕套上動態加速
+        cakes.push(new Cake(currentDynamicMultiplier));
+        nextCakeTime = time + currentCakeSpawnDelay;
+    }
+
+    // Update Entities
+    bullets.forEach(b => b.update(dt));
+    cakes.forEach(c => c.update(dt));
+    honeyJars.forEach(h => h.update(dt));
+    particles.forEach(p => p.update(dt));
+    
+    if (snake && snake.segmentsCount > 0) {
+        // 貪食蛇套用動態加速
+        snake.update(dt, cakes, player, currentDynamicMultiplier);
+    }
+
+    // --- Collisions ---
+
+    // Bullet vs Snake & Cakes
+    for (let i = bullets.length - 1; i >= 0; i--) {
+        let b = bullets[i];
+        let hitSomething = false;
+
+        // Bullet vs Cakes
+        for (let j = cakes.length - 1; j >= 0; j--) {
+            let c = cakes[j];
+            let dist = Math.hypot(b.x - c.x, b.y - c.y);
+            if (dist < b.radius + c.radius) {
+                // Destroy cake
+                spawnParticles(c.x, c.y, '#fbcfe8', 15);
+                cakes.splice(j, 1);
+                hitSomething = true;
+                score += 50; // Bonus for denying food
+                scoreDisplay.innerText = score;
+                break;
+            }
+        }
+
+        // Bullet vs Snake
+        if (!hitSomething && snake && snake.segmentsCount > 0) {
+            let hitSnake = false;
+            let hitX = 0, hitY = 0;
+
+            // Check Head
+            if (Math.hypot(b.x - snake.head.x, b.y - snake.head.y) < b.radius + snake.head.radius) {
+                hitSnake = true;
+                hitX = snake.head.x; hitY = snake.head.y;
+            } else {
+                // Check Body
+                for (let k = 0; k < snake.segmentsCount; k++) {
+                    let histIdx = k * snake.historySpacing;
+                    if (histIdx < snake.history.length) {
+                        let pos = snake.history[histIdx];
+                        if (Math.hypot(b.x - pos.x, b.y - pos.y) < b.radius + snake.segmentRadius) {
+                            hitSnake = true;
+                            hitX = pos.x; hitY = pos.y;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (hitSnake) {
+                hitSomething = true;
+                snake.segmentsCount--;
+                snakeLengthDisplay.innerText = snake.segmentsCount;
+                score += 10;
+                scoreDisplay.innerText = score;
+                spawnParticles(hitX, hitY, '#22c55e', 10);
+
+                if (snake.segmentsCount <= 0) {
+                    levelUp();
+                }
+            }
+        }
+
+        if (hitSomething) {
+            b.markedForDeletion = true;
+        }
+    }
+
+    // Snake vs Cakes (Eating)
+    if (snake && snake.segmentsCount > 0) {
+        for (let j = cakes.length - 1; j >= 0; j--) {
+            let c = cakes[j];
+            if (Math.hypot(snake.head.x - c.x, snake.head.y - c.y) < snake.head.radius + c.radius) {
+                // Snake eats cake
+                spawnParticles(c.x, c.y, '#ef4444', 15);
+                cakes.splice(j, 1);
+                snake.segmentsCount += 3; // Grows by 3 segments!
+                snakeLengthDisplay.innerText = snake.segmentsCount;
+                // Add some artificial history to prevent instant visual popping of new segments
+                for(let v=0; v<3 * snake.historySpacing; v++){
+                    let lastPos = snake.history[snake.history.length-1] || {x: snake.head.x, y: snake.head.y};
+                    snake.history.push({x: lastPos.x, y: lastPos.y});
+                }
+            }
+        }
+    }
+
+    // Snake vs Player (Game Over / Lose Life)
+    if (snake && snake.segmentsCount > 0) {
+        let playerHitboxRadius = 15;
+        let crashed = false;
+
+        // Check Head
+        if (Math.hypot(player.x - snake.head.x, player.y - snake.head.y) < playerHitboxRadius + snake.head.radius) {
+            crashed = true;
+        } else {
+            // Check Body
+            for (let k = 0; k < snake.segmentsCount; k++) {
+                let histIdx = k * snake.historySpacing;
+                if (histIdx < snake.history.length) {
+                    let pos = snake.history[histIdx];
+                    if (Math.hypot(player.x - pos.x, player.y - pos.y) < playerHitboxRadius + snake.segmentRadius) {
+                        crashed = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (crashed) {
+            if (player.invulnerable <= 0) {
+                spawnParticles(player.x, player.y, '#38bdf8', 40);
+                lives--;
+                updateLivesUI();
+                
+                if (lives > 0) {
+                    // 還有生命：給予無敵時間，並稍微將玩家重置到較安全的地方(畫面下方)
+                    player.invulnerable = 2000; // 無敵 2 秒
+                    player.x = width / 2;
+                    player.y = height - 60;
+                    input.x = width / 2;
+                    input.y = height - 60;
+                } else {
+                    gameOver("你被貪食蛇撞毀了！");
+                }
+            }
+        }
+    }
+
+    // Player vs Honey Jars (Power up)
+    for (let i = honeyJars.length - 1; i >= 0; i--) {
+        let h = honeyJars[i];
+        // 如果小蜜蜂碰到蜂蜜罐
+        if (Math.hypot(player.x - h.x, player.y - h.y) < player.width/2 + h.radius) {
+            spawnParticles(h.x, h.y, '#f59e0b', 20); // 橘色爆發粒子
+            player.fireRate = Math.max(40, player.fireRate - 35); // 射速變快，最低40ms
+            score += 200;
+            scoreDisplay.innerText = score;
+            honeyJars.splice(i, 1);
+        }
+    }
+
+    // Cleanup arrays
+    bullets = bullets.filter(b => !b.markedForDeletion);
+    cakes = cakes.filter(c => !c.markedForDeletion);
+    honeyJars = honeyJars.filter(h => !h.markedForDeletion);
+    particles = particles.filter(p => p.life > 0);
+}
+
+function draw() {
+    // Clear Background (with slight trailing effect)
+    ctx.fillStyle = 'rgba(15, 23, 42, 1)'; // Tailwind slate-900
+    ctx.fillRect(0, 0, width, height);
+
+    // Draw Stars
+    stars.forEach(s => s.draw(ctx));
+
+    // Draw Entities
+    cakes.forEach(c => c.draw(ctx));
+    honeyJars.forEach(h => h.draw(ctx));
+    bullets.forEach(b => b.draw(ctx));
+    
+    if (snake && snake.segmentsCount > 0) {
+        snake.draw(ctx);
+    }
+    
+    if (GAME_STATE === 'PLAYING' || GAME_STATE === 'TIME_UP_ANIM') {
+        player.draw(ctx);
+    }
+
+    particles.forEach(p => p.draw(ctx));
+}
+
+function gameLoop(time) {
+    if (GAME_STATE !== 'PLAYING' && GAME_STATE !== 'TIME_UP_ANIM') return;
+
+    let dt = time - lastTime;
+    // Cap dt to prevent huge jumps if tab is inactive
+    if (dt > 50) dt = 16; 
+    lastTime = time;
+
+    update(time, dt);
+    draw();
+
+    animationId = requestAnimationFrame(gameLoop);
+}
+
+// Initial Setup
+resize();
+startBtn.addEventListener('click', initGame);
+
+// AI Button Logic
+aiBtn.addEventListener('click', async () => {
+    aiBtn.disabled = true;
+    aiText.classList.remove('hidden');
+    
+    if (GAME_STATE === 'GAMEOVER') {
+        aiBtn.innerText = "✨ 戰報生成中...";
+        aiText.innerText = "正在聯絡星際總部接收戰報...";
+        // 將玩家實際的遊戲數據帶入 Prompt，讓 LLM 生成專屬戰報
+        const prompt = `你是一個幽默的星際冒險家公會播報員。玩家剛結束了一場對抗「星際貪食蛇」的遊戲。
+玩家成績：達到關卡 ${level}，最終分數 ${score} 分。
+失敗原因：${window.lastDeathReason}。
+請用繁體中文寫一段約 50~80 字的趣味戰報，給予玩家充滿戲劇性的評價與嘲諷，語氣要誇張好笑。直接輸出內文，不需 markdown 標籤。`;
+        const report = await fetchGeminiWithRetry(prompt);
+        aiText.innerText = report;
+        aiBtn.classList.add('hidden');
+    } else {
+        aiBtn.innerText = "✨ 接收訊號中...";
+        aiText.innerText = "正在連接蜜蜂女王的星際頻段...";
+        // 戰前由 LLM 扮演角色給予隨機回饋
+        const prompt = `你是一位高傲但愛護部下的「星際蜜蜂女王」。你的工蜂（玩家）即將出發對抗宇宙中的危險生物「星際貪食蛇」。請用繁體中文給予玩家一句大約 30~50 字的戰前鼓勵或幽默的警告。直接輸出內文，不需 markdown 標籤。`;
+        const quote = await fetchGeminiWithRetry(prompt);
+        aiText.innerText = quote;
+        aiBtn.classList.add('hidden');
+    }
+});
+
+</script>
+
+</body></html>
